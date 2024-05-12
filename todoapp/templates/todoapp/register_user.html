@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+
+   <!-- Estilos locales: -->
+   <link rel="stylesheet" type="text/css" href="static/todoapp/style.css">
+
+   <!-- Estilos de Bootstrap: No se usará para esta actividad -->
+   <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
+
+   <title>Registro</title>
+</head>
+<body>
+   <div class="container">
+       <h1> Registro </h1>
+       <form method="post">
+           {% csrf_token %}
+           <div class="form-group">
+               <label for="nombre_usuario">Nombre</label>
+               <input type="text" class="form-control" id=nombre_usuario name="nombre" required>
+           </div>
+
+           <div class="form-group">
+               <label for="contraseña">Contraseña</label>
+               <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+           </div>
+
+            <div class="form-group">
+               <label for="apodo">Apodo</label>
+               <input type="text" class="form-control" id="apodo" name="apodo" required>
+            </div>
+
+           <div>
+               <label for="pronombre">Pronombre</label>
+               <select id="pronombre" class="form-control" name="pronombre" required>
+                   <option class="disabled" value="">Elige un pronombre</option>
+                   <option value="El">El</option>
+                   <option value="La">La</option>
+                   <option value="Le">Le</option>
+                   <option value="Otro">Otro</option>
+               </select>
+           </div>
+
+            <div class="form-group">
+                <label for="mail">Mail</label>
+                <input type="email" class="form-control" id="mail" name="mail" required>
+            </div>
+            <button type="submit">Crear usuario</button>
+       </form>
+   </div>
+</body>
+</html>
