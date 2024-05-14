@@ -1,5 +1,5 @@
 # Proyecto WC
-Repetir esta parte cuando trabajen.
+Repetir esta parte cuando trabajen (creación venv).
 >Deben correr el proyecto en un nuevo ambiente virtual utilizando el requirements.txt que tiene este proyecto.
 
 1. `python3 -m venv myvenv` en Linux o `python -m venv myvenv` en Windows para crear el nuevo ambiente virtual.
