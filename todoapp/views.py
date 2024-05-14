@@ -5,7 +5,9 @@ from django.shortcuts import render, redirect
 from todoapp.models import Tarea
 from categorias.models import Categoria
 
-
+def register_user(request):
+   return render(request,"todoapp/register_user.html")
+   
 def tareas(request):  # the index view
     mis_tareas = Tarea.objects.all()  # quering all todos with the object manager
     categorias = Categoria.objects.all()  # getting all categories with object manager
@@ -22,3 +24,4 @@ def tareas(request):  # the index view
             nueva_tarea = Tarea(titulo=titulo, contenido=contenido, categoria=categoria)  # Crear la tarea
             nueva_tarea.save()  # guardar la tarea en la base de datos.
             return redirect("/tareas")  # recargar la página.
+
