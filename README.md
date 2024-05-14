@@ -14,6 +14,9 @@ En el buscador se puede ingresar a:
 
 Crea un superusuario haciendo `python manage.py createsuperuser`
 
+Ayuda para trabajar en cada compu remotamente:
+Pueden hacer push y pull con sus commit.
+También sirve crear 2 entornos virtuales: venv y venv2.
 
 Para el login deberian seguir en esta parte :p 
 
