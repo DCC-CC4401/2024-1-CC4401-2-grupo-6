@@ -7,21 +7,12 @@ Repetir esta parte cuando trabajen.
 3. `python -m pip install --upgrade pip`
 4. `pip install -r requirements.txt`
 
- 
-
-## Lo que deberian ejecutar en en terminal del venv
-
-        ```python
-       $ python manage.py makemigrations todoapp categorias
-       $ python manage.py migrate
-       $ python manage.py loaddata categorias/categorias.json
-       $ python manage.py runserver
-       $ python manage.py createsuperuse
-       ```
 En el buscador se puede ingresar a:
-`127.0.0.1:8000/user`
+`127.0.0.1:8000/tareas`
 `127.0.0.1:8000/register`
 `127.0.0.1:8000/admin`
+
+Crea un superusuario haciendo `python manage.py createsuperuser`
 
 
 Para el login deberian seguir en esta parte :p 
