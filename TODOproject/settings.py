@@ -15,6 +15,8 @@ import mimetypes
 
 import todoapp
 
+AUTH_USER_MODEL = 'todoapp.User'
+
 mimetypes.add_type("text/css", ".css", True)
 
 
