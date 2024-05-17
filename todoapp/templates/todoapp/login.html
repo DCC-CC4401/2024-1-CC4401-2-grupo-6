@@ -1,30 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Estilos locales: -->
     <link rel="stylesheet" type="text/css" href="static/todoapp/style.css">
    
-    <title>Login</title>
+    <title>Baños Beauchef - Log in</title>
 </head>
 <body>
     <div class="container">
-        <div class="content">
-            <h1> Iniciar Sesión </h1>
-            <form method="post" >
+        <div class="slider">
+            <!-- Aquí van las imágenes del slider -->
+            <img class="slide" src="imagen1.jpg" alt="Imagen 1">
+            <img class="slide" src="imagen2.jpg" alt="Imagen 2">
+            <img class="slide" src="imagen3.jpg" alt="Imagen 3">
+        </div>
+        <div class="login-form">
+            <div class="form-container">
+                <h2>Baños Beauchef</h2>
+                <form method="post" >
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="nombre_usuario">Nombre</label>
-                    <input type="text" class="form-control" id=nombre_usuario name="username" required>
+                    <!-- <label for="nombre_usuario">Nombre</label> -->
+                    <input type="text" class="form-control" id=nombre_usuario name="username" placeholder="Nombre" required>
                 </div>
                 <div class="form-group">
-                    <label for="contraseña">Contraseña</label>
-                    <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+                    <!-- <label for="contraseña">Contraseña</label> -->
+                    <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Contraseña" required>
                 </div>
-                <button type="submit">Entrar</button>
+                <button type="submit">Iniciar Sesión</button>
             </form>
+            <hr>
+            <div class="register-button">
+                <button onclick="window.location.href='{{register_user}}'">Crear una cuenta</button>
+            </div>
         </div>
     </div>
+
+    <script>
+        // JavaScript para el slider
+        let index = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideCount = slides.length;
+    
+        function showSlide() {
+            slides.forEach(slide => {
+                slide.style.display = 'none';
+            });
+            slides[index].style.display = 'block';
+        }
+    
+        function nextSlide() {
+            index++;
+            if (index >= slideCount) {
+                index = 0;
+            }
+            showSlide();
+        }
+    
+        function prevSlide() {
+            index--;
+            if (index < 0) {
+                index = slideCount - 1;
+            }
+            showSlide();
+        }
+    
+        setInterval(nextSlide, 3000); // Cambia de diapositiva cada 3 segundos
+    </script>
+
 </body>
 </html>

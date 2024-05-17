@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baños Beauchef - Log in</title>
+    <style>
+        
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="slider">
+        <!-- Aquí van las imágenes del slider -->
+        <img class="slide" src="imagen1.jpg" alt="Imagen 1">
+        <img class="slide" src="imagen2.jpg" alt="Imagen 2">
+        <img class="slide" src="imagen3.jpg" alt="Imagen 3">
+    </div>
+    <div class="login-form">
+        <div class="form-container">
+            <h2>Baños Beauchef</h2>
+            <form action="tu-script-de-autenticacion.php" method="POST">
+                <input type="email" name="email" placeholder="Correo Electrónico" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+            <hr>
+            <div class="register-button">
+                <button onclick="window.location.href='registro.html'">Crear una cuenta</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript para el slider
+    let index = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slideCount = slides.length;
+
+    function showSlide() {
+        slides.forEach(slide => {
+            slide.style.display = 'none';
+        });
+        slides[index].style.display = 'block';
+    }
+
+    function nextSlide() {
+        index++;
+        if (index >= slideCount) {
+            index = 0;
+        }
+        showSlide();
+    }
+
+    function prevSlide() {
+        index--;
+        if (index < 0) {
+            index = slideCount - 1;
+        }
+        showSlide();
+    }
+
+    setInterval(nextSlide, 3000); // Cambia de diapositiva cada 3 segundos
+</script>
+
+</body>
+</html>

@@ -1,68 +1,89 @@
+/* Definición de la fuente personalizada */
+@font-face {
+    font-family: 'Nexa-Heavy';
+    src: url('fonts/Nexa-Heavy.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Nexa-ExtraLight';
+    src: url('fonts/Nexa-ExtraLight.ttf') format('truetype');
+}
+
+/* Estilos para el diseño */
 body {
+    font-family: 'Nexa-ExtraLight', sans-serif; /* Usa 'Nexa-ExtraLight' como fuente principal y luego sans-serif como fuente de respaldo */
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.slider {
+    flex: 1;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    position: relative;
+}
+.slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.login-form {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f2f5; /* Color de fondo */
-}
-
-.container {
-    background-color: #ffffff; /* Color del contenedor */
-    border-radius: 10px; /* Bordes redondeados */
     padding: 20px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Sombra */
-    max-width: 530px; /* Ancho máximo del contenedor */
-    width: 100%; /* Para que ocupe todo el ancho disponible */
-    box-sizing: border-box; /* Para que el padding no afecte el ancho */
 }
 
-h1 {
+.form-container {
+    max-width: 300px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.form-container h2 {
     text-align: center;
-    color: #007bff; /* Color del título */
-}
-
-.form-group {
     margin-bottom: 20px;
 }
-
-.form-group {
-    margin-bottom: 20px;
+.form-container input {
+    width: 100%; /* Establecer ancho al 100% */
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Incluir el padding en el ancho total */
 }
-
-/* Ajuste de espaciado entre el campo de pronombre y el campo de correo electrónico */
-#pronombre {
-    margin-bottom: 20px;
-}
-
-
-label {
-    color: #007bff; /* Color de las etiquetas */
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-select {
+.form-container button {
     width: 100%;
     padding: 10px;
-    border: 1px solid #007bff; /* Color del borde de los campos de entrada */
-    border-radius: 5px; /* Bordes redondeados */
-    box-sizing: border-box;
-    outline: none;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff; /* Color de fondo del botón */
-    color: #ffffff; /* Color del texto del botón */
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 5px; /* Bordes redondeados */
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-family: 'Nexa-Heavy', sans-serif; /* Cambiar la fuente a Nexa-Heavy */
 }
-
-button:hover {
-    background-color: #0056b3; /* Cambio de color al pasar el ratón */
+.form-container hr {
+    margin: 15px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+.register-button {
+    text-align: center;
+    margin-top: 10px;
+}
+.register-button button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Nexa-ExtraLight', sans-serif; /* Mantener la fuente como Nexa-ExtraLight */
 }
