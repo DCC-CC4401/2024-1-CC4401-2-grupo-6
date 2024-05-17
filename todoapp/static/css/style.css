@@ -1,17 +1,17 @@
 /* Definición de la fuente personalizada */
 @font-face {
     font-family: 'Nexa-Heavy';
-    src: url('fonts/Nexa-Heavy.ttf') format('truetype');
+    src: url('static/fonts/Nexa-Heavy.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Nexa-ExtraLight';
-    src: url('fonts/Nexa-ExtraLight.ttf') format('truetype');
+    src: url('static/fonts/Nexa-ExtraLight.ttf') format('truetype');
 }
 
 /* Estilos para el diseño */
 body {
-    font-family: 'Nexa-ExtraLight', sans-serif; /* Usa 'Nexa-ExtraLight' como fuente principal y luego sans-serif como fuente de respaldo */
+    font-family: "Mulish", sans-serif; /* Usa 'Nexa-ExtraLight' como fuente principal y luego sans-serif como fuente de respaldo */
     margin: 0;
     padding: 0;
 }
