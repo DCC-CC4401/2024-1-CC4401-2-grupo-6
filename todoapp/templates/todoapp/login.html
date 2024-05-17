@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,9 +13,9 @@
     <div class="container">
         <div class="slider">
             <!-- Aquí van las imágenes del slider -->
-            <img class="slide" src="imagen1.jpg" alt="Imagen 1">
-            <img class="slide" src="imagen2.jpg" alt="Imagen 2">
-            <img class="slide" src="imagen3.jpg" alt="Imagen 3">
+            <img class="slide" src="{% static 'images-login/imagen1.jpg' %}" alt="Imagen 1">
+            <img class="slide" src="{% static 'images-login/imagen2.jpg' %}" alt="Imagen 2">
+            <img class="slide" src="{% static 'images-login/imagen3.jpg' %}" alt="Imagen 3">
         </div>
         <div class="login-form">
             <div class="form-container">
