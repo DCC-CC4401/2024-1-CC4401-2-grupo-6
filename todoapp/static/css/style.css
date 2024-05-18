@@ -101,6 +101,7 @@ body {
     text-align: center;
     margin-top: 10px;
     font-family: "Mulish", sans-serif;
+    display: flex;
 }
 
 /* Media queries para pantallas pequeñas */
