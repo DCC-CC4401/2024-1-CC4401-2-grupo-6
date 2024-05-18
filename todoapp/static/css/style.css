@@ -1,22 +1,25 @@
 /* styles.css */
 
-/* Definición de la fuente personalizada */
-@font-face {
-    font-family: 'Nexa-Heavy';
-    src: url('static/fonts/Nexa-Heavy.ttf') format('truetype');
+/* Variables */
+:root {
+    --font-main: 'Mulish', sans-serif;
+    --color-primary: #007bff;
+    --color-primary-dark: #0056b3;
+    --color-success: #28a745;
+    --color-success-dark: #218838;
+    --color-border: #ccc;
+    --color-bg: #ffffff;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-bg-light-gray: #f8f9fa; /* Gris casi blanco */
 }
 
-@font-face {
-    font-family: 'Nexa-ExtraLight';
-    src: url('static/fonts/Nexa-ExtraLight.ttf') format('truetype');
-}
-
-/* Estilos para el diseño */
+/* General */
 body {
-    font-family: "Mulish", sans-serif; /* Usa 'Nexa-ExtraLight' como fuente principal y luego sans-serif como fuente de respaldo */
+    font-family: var(--font-main);
     margin: 0;
     padding: 0;
 }
+
 .container {
     display: flex;
     height: 100vh;
@@ -28,100 +31,145 @@ body {
     overflow: hidden;
     position: relative;
 }
+
 .slider img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
+/* Form */
 .login-form {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    background-color: var(--color-bg-light-gray); /* Color de fondo gris casi blanco */
 }
 
 .form-container {
     max-width: 300px;
     width: 100%;
-    background-color: #ffffff;
+    background-color: var(--color-bg);
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px var(--color-shadow);
 }
+
 .form-container h2 {
-    font-family: "Mulish", sans-serif;
+    font-family: var(--font-main);
     text-align: center;
     margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: 700; /* Poner en negrita */
 }
+
 .form-container input {
-    width: 100%; /* Establecer ancho al 100% */
+    width: 100%;
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 5px;
-    box-sizing: border-box; /* Incluir el padding en el ancho total */
+    box-sizing: border-box;
 }
-.form-container button, .register-button a {
+
+/* Common button styles */
+.btn-common {
+    display: block;
     width: 100%;
     padding: 10px;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "Mulish", sans-serif; /* Cambiar la fuente a Nexa-Heavy */
-    font-size: 16px; /* Tamaño de fuente */
-}
-.form-container button {
-    background-color: #007bff; /* Azul */
-}
-.form-container button:hover {
-    background-color: #0056b3; /* Azul oscuro */ /* Cambio de color al pasar el mouse */
-}
-.register-button a {
-    background-color: #28a745; /* Verde */
+    font-family: var(--font-main);
+    font-size: 18px;
     text-align: center;
-    text-decoration: none;
-    display: block; /* Hacer que el enlace se comporte como un botón */
+    text-decoration: none; /* Remove underline from links */
+    box-sizing: border-box;
+    font-weight: 700; /* Poner en negrita */
 }
-.register-button a:hover {
-    background-color: #218838; /* Verde oscuro */
+
+.btn-primary {
+    background-color: var(--color-primary);
 }
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.btn-success {
+    background-color: var(--color-success);
+}
+
+.btn-success:hover {
+    background-color: var(--color-success-dark);
+}
+
 .form-container hr {
     margin: 15px 0;
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--color-border);
 }
 
 .form-control {
-    font-family: 'Mulish', sans-serif;
+    font-family: var(--font-main);
 }
 
 .register-button {
     text-align: center;
     margin-top: 10px;
-    font-family: "Mulish", sans-serif;
+    font-family: var(--font-main);
 }
 
-/* Media queries para pantallas pequeñas */
+.forgot-password {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px; /* Ajusta el tamaño según lo necesites */
+}
+
+.forgot-password a {
+    font-family: var(--font-main);
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+/* Media queries */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
     }
+
     .slider {
-        height: 25vh; /* Ocupa el primer cuarto de la pantalla */
+        height: 25vh;
     }
+
     .login-form {
-        height: 75vh; /* Ocupa los 3/4 restantes de la pantalla */
-        justify-content: flex-start; /* Alinear contenido al inicio */
-        padding-top: 20px; /* Añadir algo de padding superior */
+        height: 75vh;
+        justify-content: flex-start;
+        padding-top: 20px;
     }
+
     .form-container {
         max-width: 100%;
         padding: 10px;
     }
-    .form-container input, .form-container button, .register-button a {
-        font-size: 14px; /* Ajustar el tamaño de fuente para pantallas pequeñas */
+
+    .form-container input {
+        font-size: 14px;
         padding: 8px;
+    }
+
+    .btn-common {
+        font-size: 16px; /* Ajustar el tamaño de la fuente para pantallas pequeñas */
+    }
+
+    .forgot-password {
+        font-size: 14px; /* Ajusta el tamaño según lo necesites */
     }
 }
