@@ -1,53 +1,127 @@
+/* styles.css */
+
+/* Definición de la fuente personalizada */
+@font-face {
+    font-family: 'Nexa-Heavy';
+    src: url('static/fonts/Nexa-Heavy.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Nexa-ExtraLight';
+    src: url('static/fonts/Nexa-ExtraLight.ttf') format('truetype');
+}
+
+/* Estilos para el diseño */
+body {
+    font-family: "Mulish", sans-serif; /* Usa 'Nexa-ExtraLight' como fuente principal y luego sans-serif como fuente de respaldo */
+    margin: 0;
+    padding: 0;
+}
 .container {
-    display: flex; /* Utiliza flexbox para distribuir los elementos */
-    height: 100vh; /* Altura completa de la ventana */
-    font-family: "Mulish", sans-serif; /* Aplica la fuente Mulish */
+    display: flex;
+    height: 100vh;
 }
 
 .slider {
-    flex: 1; /* Ocupa la mitad izquierda */
-    background-color: #f0f0f0; /* Color de fondo */
-    overflow: hidden; /* Evita que las imágenes se desborden */
-    position: relative; /* Posición relativa para las imágenes */
+    flex: 1;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    position: relative;
 }
-
 .slider img {
-    width: 100%; /* Ancho completo */
-    height: 100%; /* Altura completa */
-    object-fit: cover; /* Ajusta las imágenes para cubrir */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-
-.form-container input,
-.form-container button {
-    font-family: "Mulish", sans-serif; /* Aplica la fuente Mulish */
+.login-form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 .form-container {
-    max-width: 400px; /* Ancho máximo del formulario */
-    width: 100%; /* Ancho completo del contenedor */
-    padding: 20px; /* Espacio interno */
-    background-color: #ffffff; /* Color de fondo */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    max-width: 300px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.form-container h2 {
+    font-family: "Mulish", sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form-container input {
+    width: 100%; /* Establecer ancho al 100% */
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Incluir el padding en el ancho total */
+}
+.form-container button, .register-button a {
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Mulish", sans-serif; /* Cambiar la fuente a Nexa-Heavy */
+    font-size: 16px; /* Tamaño de fuente */
+}
+.form-container button {
+    background-color: #007bff; /* Azul */
+}
+.form-container button:hover {
+    background-color: #0056b3; /* Azul oscuro */ /* Cambio de color al pasar el mouse */
+}
+.register-button a {
+    background-color: #28a745; /* Verde */
+    text-align: center;
+    text-decoration: none;
+    display: block; /* Hacer que el enlace se comporte como un botón */
+}
+.register-button a:hover {
+    background-color: #218838; /* Verde oscuro */
+}
+.form-container hr {
+    margin: 15px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
 }
 
-.login-form {
-    flex: 1; /* Ocupa la mitad derecha */
-    display: flex; /* Utiliza flexbox */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    padding: 20px; /* Espaciado interno */
-    background-color: #f0f0f0; /* Color de fondo */
-    position: relative; /* Posición relativa */
+.form-control {
+    font-family: 'Mulish', sans-serif;
 }
 
-.window {
-    width: 100%; /* Ancho completo del contenedor */
-    max-width: 500px; /* Ancho máximo de la ventana */
-    margin: auto; /* Centra horizontalmente */
-    background-color: #ffffff; /* Color de fondo */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra */
-    overflow: hidden; /* Oculta contenido desbordado */
+.register-button {
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Mulish", sans-serif;
 }
 
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .slider {
+        height: 25vh; /* Ocupa el primer cuarto de la pantalla */
+    }
+    .login-form {
+        height: 75vh; /* Ocupa los 3/4 restantes de la pantalla */
+        justify-content: flex-start; /* Alinear contenido al inicio */
+        padding-top: 20px; /* Añadir algo de padding superior */
+    }
+    .form-container {
+        max-width: 100%;
+        padding: 10px;
+    }
+    .form-container input, .form-container button, .register-button a {
+        font-size: 14px; /* Ajustar el tamaño de fuente para pantallas pequeñas */
+        padding: 8px;
+    }
+}
