@@ -137,6 +137,8 @@ body {
 
 .forgot-password a:hover {
     text-decoration: underline;
+    font-family: "Mulish", sans-serif;
+    display: flex;
 }
 
 /* Media queries */
