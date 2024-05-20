@@ -6,9 +6,14 @@ class NuevaTareaModelForm(forms.ModelForm):
     class Meta:
         model = Tarea
         fields = ['titulo', 'contenido', 'categoria']
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Baño DCC Torre Norte Tercer Piso Mujeres'}),
+            'contenido': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Buena señal de wifi, limpio, posee perfumadores en cada cabina, etc.'}),
+            'categoria': forms.Select(attrs={'class': 'form-control'}),
+        }
 
-    def clean_titulo(self):	
+    def clean_titulo(self):
         field = self.cleaned_data.get("titulo")
-        if not "Tarea" in field:
-            raise forms.ValidationError("Debe incluir el texto 'Tarea'")
+        if not "Baño" in field:
+            raise forms.ValidationError("Debe incluir el texto 'Baño' en el título")
         return field

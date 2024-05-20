@@ -1,0 +1,114 @@
+/* styles forms.css */
+
+/* Definición de la fuente personalizada */
+@font-face {
+    font-family: 'Nexa-Heavy';
+    src: url('static/fonts/Nexa-Heavy.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Nexa-ExtraLight';
+    src: url('static/fonts/Nexa-ExtraLight.ttf') format('truetype');
+}
+
+/* Estilos para el diseño */
+
+.saludo {
+    font-size: 18px; /* Ajusta el tamaño del texto */
+    font-weight: bold; /* Hace el texto más grueso */
+    color: #333; /* Cambia el color del texto si es necesario */
+}
+
+.btn-outline-success {
+    color: #363770;
+    background-color: transparent;
+    border-color: #6c6ee6;
+}
+
+.btn-outline-success:hover {
+    background-color: #6c6ee6;
+}
+
+.col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+}
+
+body {
+    font-family: "Mulish", sans-serif; /* Usa 'Nexa-ExtraLight' como fuente principal y luego sans-serif como fuente de respaldo */
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    display: block;
+    margin-top: 0em;
+    margin-bottom: 12px;
+    unicode-bidi: isolate;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.card {
+    max-width: 600px;
+    margin: 0 auto; /* Center the card on the page */
+    border-color: rgb(180, 159, 255);
+    margin-bottom: 15px;
+}
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgb(193, 194, 255);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.form-control {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    margin-top: 10px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .slider {
+        height: 25vh; /* Ocupa el primer cuarto de la pantalla */
+    }
+    .login-form {
+        height: 75vh; /* Ocupa los 3/4 restantes de la pantalla */
+        justify-content: flex-start; /* Alinear contenido al inicio */
+        padding-top: 20px; /* Añadir algo de padding superior */
+    }
+    .form-container {
+        max-width: 100%;
+        padding: 10px;
+    }
+    .form-container input, .form-container button, .register-button a {
+        font-size: 14px; /* Ajustar el tamaño de fuente para pantallas pequeñas */
+        padding: 8px;
+    }
+}
+
+
+

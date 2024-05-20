@@ -33,10 +33,26 @@ def tareas(request): #the index view
     if request.method == "POST":
         form_tarea= NuevaTareaModelForm(request.POST)
         if form_tarea.is_valid():
-            nueva_tarea = form_tarea.save() # save() de ModelForm
-            if request.user.is_authenticated:
+            
+            if request.user.is_authenticated: # si el usuario está registrado
+                nueva_tarea = form_tarea.save(commit=False)
                 nueva_tarea.owner = request.user
-                nueva_tarea.save()  # save() de Model
+                nueva_tarea.clean()
+
+                if Tarea.objects.count() >= 5: # Si hay 5 tareas o más
+                    messages.error(request, 'No puedes tener más de 5 solicitudes activas.')
+                    return redirect('/tareas')
+                
+                # Si hay menos de 5 tareas, se guarda la nueva tarea
+                nueva_tarea.save() 
+                messages.success(request, 'Se subió la solicitud correctamente para: ' + nueva_tarea.titulo)
+                
+
+            else: # Si el usuario no está autenticado
+                # Añadir mensaje de error
+                messages.error(request, 'Debes estar registrado para poder enviar una solicitud.')
+                return redirect('/tareas')
+
         return render(request, "todoapp/index.html", {"tareas": mis_tareas, "form_tarea": form_tarea})
 
 def register_user(request):
@@ -74,4 +90,4 @@ def login_user(request):
  
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect('/tareas')
+    return HttpResponseRedirect('/login')
