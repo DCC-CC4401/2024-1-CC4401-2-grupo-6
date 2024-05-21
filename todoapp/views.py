@@ -91,3 +91,30 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/login')
+
+def forgot_password(request):
+    """
+    This function is called when the user wants to recover their password on the
+    login page.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    - If the request method is 'GET', it renders the 'forgot_password.html' template.
+    - If the request method is 'POST', it retrieves the email from the request data,
+      checks if a user with that email exists, and redirects the user accordingly.
+      If the user exists, a success message is displayed and the user is redirected
+      to the '/tareas' URL. Otherwise, the user is redirected to the '/register' URL.
+
+    """
+    if request.method == 'GET':
+        return render(request, "todoapp/forgot_password.html")
+    if request.method == 'POST':
+        mail = request.POST['mail']
+        usuario = User.objects.get(email=mail)
+        if usuario is not None:
+            messages.success(request, 'Se envió un correo a ' + usuario.email)
+            return HttpResponseRedirect('/tareas')
+        else:
+            return HttpResponseRedirect('/register')

@@ -1,13 +1,17 @@
+/* styles.css */
+
+/* Definición de la fuente personalizada */
 @font-face {
     font-family: 'Nexa-Heavy';
-    src: url('../fonts/Nexa-Heavy.ttf') format('truetype');
+    src: url('{% static "fonts/Nexa-Heavy.ttf" %}') format('truetype');
 }
 
 @font-face {
     font-family: 'Nexa-ExtraLight';
-    src: url('../fonts/Nexa-ExtraLight.ttf') format('truetype');
+    src: url('{% static "fonts/Nexa-ExtraLight.ttf" %}') format('truetype');
 }
 
+/* Estilos para el diseño */
 body {
     font-family: "Mulish", sans-serif;
     margin: 0;
@@ -50,6 +54,7 @@ body {
 }
 
 .form-container h2 {
+    font-family: "Mulish", sans-serif;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -66,7 +71,6 @@ body {
 .form-container button, .register-button a {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -75,8 +79,23 @@ body {
     font-size: 16px;
 }
 
-.form-container button:hover, .register-button a:hover {
+.form-container button {
+    background-color: #007bff;
+}
+
+.form-container button:hover {
     background-color: #0056b3;
+}
+
+.register-button a {
+    background-color: #28a745;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.register-button a:hover {
+    background-color: #218838;
 }
 
 .form-container hr {
@@ -91,5 +110,33 @@ body {
 
 .register-button {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
+    font-family: "Mulish", sans-serif;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .slider {
+        height: 25vh;
+    }
+
+    .login-form {
+        height: 75vh;
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+
+    .form-container {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .form-container input, .form-container button, .register-button a {
+        font-size: 14px;
+        padding: 8px;
+    }
 }

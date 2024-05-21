@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
     <!-- Estilos locales: -->
     <!-- <link rel="stylesheet" type="text/css" href="static/css/style.css"> -->
@@ -18,7 +19,6 @@
 <body>
     <div class="container">
         <div class="slider">
-            <!-- Aquí van las imágenes del slider -->
             <img class="slide" src="{% static 'images-login/imagen1.jpg' %}" alt="Imagen 1">
             <img class="slide" src="{% static 'images-login/imagen2.jpg' %}" alt="Imagen 2">
             <img class="slide" src="{% static 'images-login/imagen3.jpg' %}" alt="Imagen 3">
@@ -26,21 +26,23 @@
         <div class="login-form">
             <div class="form-container">
                 <h2>Baños Beauchef</h2>
-                <form method="post" >
-                {% csrf_token %}
-                <div class="form-group">
-                    <!-- <label for="nombre_usuario">Nombre</label> -->
-                    <input type="text" class="form-control" id=nombre_usuario name="username" placeholder="Nombre" required>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" id=nombre_usuario name="username" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+                    </div>
+                    <button type="submit" class="btn-common btn-primary">Iniciar Sesión</button>
+                </form>
+                <!-- <div class="forgot-password"> -->
+                <!--    <a href="{% url 'register_user' %}">¿Olvidaste tu contraseña?</a> -->
+                <!-- </div> -->
+                <hr>
+                <div class="register-button">
+                    <a href="{% url 'register_user' %}" class="btn-common btn-success">Crear una cuenta</a>
                 </div>
-                <div class="form-group">
-                    <!-- <label for="contraseña">Contraseña</label> -->
-                    <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Contraseña" required>
-                </div>
-                <button type="submit">Iniciar Sesión</button>
-            </form>
-            <hr>
-            <div class="register-button">
-                <a href="{% url 'register_user' %}" class="button">Crear una cuenta</a>
             </div>
         </div>
     </div>
@@ -50,14 +52,14 @@
         let index = 0;
         const slides = document.querySelectorAll('.slide');
         const slideCount = slides.length;
-    
+
         function showSlide() {
             slides.forEach(slide => {
                 slide.style.display = 'none';
             });
             slides[index].style.display = 'block';
         }
-    
+
         function nextSlide() {
             index++;
             if (index >= slideCount) {
@@ -65,17 +67,11 @@
             }
             showSlide();
         }
-    
-        function prevSlide() {
-            index--;
-            if (index < 0) {
-                index = slideCount - 1;
-            }
-            showSlide();
-        }
-    
-        setInterval(nextSlide, 3000); // Cambia de diapositiva cada 3 segundos
-    </script>
 
+        setInterval(nextSlide, 3000); // Cambia de diapositiva cada 3 segundos
+
+        // Inicializa el slider mostrando la primera diapositiva
+        showSlide();
+    </script>
 </body>
 </html>
