@@ -64,11 +64,11 @@ def register_user(request):
      nombre = request.POST['nombre']
      contraseña = request.POST['contraseña']
      apodo = request.POST['apodo']
-     pronombre = request.POST['pronombre']
+     #pronombre = request.POST['pronombre']
      mail = request.POST['mail']
 
      #Crear el nuevo usuario
-     user = User.objects.create_user(username=nombre, password=contraseña, email=mail, apodo=apodo, pronombre=pronombre)
+     user = User.objects.create_user(username=nombre, password=contraseña, email=mail, apodo=apodo)
      messages.success(request, 'Se creó el usuario para ' + user.apodo)
 
      #Redireccionar la página /tareas
