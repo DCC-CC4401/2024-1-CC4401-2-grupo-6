@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Baños Beauchef</h1>
+
+    <form method="get" id="filterForm">
+        <label for="building">Edificio:</label>
+        <select name="building" id="building">
+            <option value="">Todos los edificios</option>
+            {% for building in buildings %}
+                <option value="{{ building }}" {% if building == selected_building %}selected{% endif %}>
+                    {{ building }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="floor">Piso:</label>
+        <select name="floor" id="floor">
+            <option value="">Todos los pisos</option>
+            {% for floor in floors %}
+                <option value="{{ floor }}" {% if floor|stringformat:"i" == selected_floor %}selected{% endif %}>
+                    {{ floor }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="gender">Gender:</label>
+        <select name="gender" id="gender">
+            <option value="">All Genders</option>
+            {% for gender in genders %}
+                <option value="{{ gender }}" {% if gender == selected_gender %}selected{% endif %}>
+                    {{ gender|title }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <ul>
+    {% for bathroom in bathrooms %}
+        <li>{{ bathroom.name }} - Edificio {{ bathroom.building }}, Piso {{ bathroom.floor }}, {{ bathroom.get_gender_display }}</li>
+    {% endfor %}
+    </ul>
+
+    <script>
+        // JavaScript to dynamically update floors and bathrooms based on building selection
+        document.getElementById('building').addEventListener('change', function() {
+            document.getElementById('filterForm').submit();
+        });
+
+        document.getElementById('floor').addEventListener('change', function() {
+            document.getElementById('filterForm').submit();
+        });
+    </script>
+</body>
+</html>

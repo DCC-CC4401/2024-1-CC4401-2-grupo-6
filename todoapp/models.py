@@ -19,3 +19,18 @@ class Tarea(models.Model):  # Todolist able name that inherits models.Model
 
     def __str__(self):
         return self.titulo  # name to be shown when called
+
+class Bathroom(models.Model):
+    GENDER_CHOICES = [
+        ('mujer', 'Mujer'),
+        ('hombre', 'Hombre'),
+        ('universal', 'Universal'),
+    ]
+
+    name = models.CharField(max_length=100)
+    building = models.CharField(max_length=3)
+    floor = models.IntegerField()
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+
+    def __str__(self):
+        return f"{self.name} - Edificio {self.building}, Piso {self.floor}, {self.get_gender_display()}"

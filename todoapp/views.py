@@ -11,6 +11,7 @@ from django.contrib import messages
 # Create your views here.
 from todoapp.models import Tarea
 from todoapp.models import User  
+from .models import Bathroom
 
 from categorias.models import Categoria
 
@@ -118,3 +119,48 @@ def forgot_password(request):
             return HttpResponseRedirect('/tareas')
         else:
             return HttpResponseRedirect('/register')
+        
+
+def bathroom_list(request):
+    bathrooms = Bathroom.objects.all()
+    
+    buildings = Bathroom.objects.values_list('building', flat=True).distinct()
+    floors = Bathroom.objects.values_list('floor', flat=True).distinct().order_by('floor')
+    genders = [choice[0] for choice in Bathroom.GENDER_CHOICES]
+    
+    building_filter = request.GET.get('building')
+    floor_filter = request.GET.get('floor')
+    bathroom_filter = request.GET.get('bathroom')
+    gender_filter = request.GET.get('gender')
+
+    if building_filter:
+        bathrooms = bathrooms.filter(building=building_filter)
+    
+    if floor_filter:
+        bathrooms = bathrooms.filter(floor=floor_filter)
+
+    if bathroom_filter:
+        bathrooms = bathrooms.filter(name=bathroom_filter)
+
+    if gender_filter:
+        bathrooms = bathrooms.filter(gender=gender_filter)
+
+    available_bathrooms = bathrooms.values_list('name', flat=True)
+
+    context = {
+        'bathrooms': bathrooms,
+        'buildings': buildings,
+        'floors': floors,
+        'available_bathrooms': available_bathrooms,
+        'genders': genders,
+        'selected_building': building_filter,
+        'selected_floor': floor_filter,
+        'selected_bathroom': bathroom_filter,
+        'selected_gender': gender_filter,
+    }
+    return render(request, 'todoapp/bathroom_list.html', context)
+
+
+def bathroom_detail(request, id):
+    bathroom = Bathroom.objects.get(id=id)
+    return render(request, 'todoapp/bathroom_detail.html', {'bathroom': bathroom})

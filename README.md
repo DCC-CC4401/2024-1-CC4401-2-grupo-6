@@ -34,7 +34,15 @@ Instalamos las librerías requeridas para el funcionamiento del proyecto.
 ```bash
 pip install -r requirements.txt
 ```
-
+Para actualizar
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+Para actualizar datos de baños
+```bash
+python manage.py load_bathrooms   
+```
 Para iniciar
 ```bash
 python manage.py runserver  

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ bathroom.name }}</h1>
+    <p>Building: {{ bathroom.building }}</p>
+    <p>Floor: {{ bathroom.floor }}</p>
+    <p>Description: {{ bathroom.description }}</p>
+    <p>Accessible: {% if bathroom.is_accessible %}Yes{% else %}No{% endif %}</p>  
+</body>
+</html>
