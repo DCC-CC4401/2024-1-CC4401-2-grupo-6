@@ -1,0 +1,27 @@
+{% extends 'todoapp/menu.html' %}
+
+{% block title %} Agregar Baño {% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 2em; flex-direction: column">
+    <div id="encabezado" class="row">
+        <div class="col-12">
+            <h1>Agregar Baño</h1>
+            <p class="tagline">Completa el formulario para agregar un nuevo baño</p>
+        </div>
+    </div>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                Nuevo Baño
+            </div>
+            <div class="card-body">
+                {{ form.as_p }}
+                <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div><!-- container -->
+{% endblock %}

@@ -7,11 +7,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style forms.css' %}" > 
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 
 </head>
 <body>
     <nav class="navbar navbar-light" style="background-color:#a7daff;">
-        <a class="navbar-brand" href="#">WC Finder</a>
+        <a class="navbar-brand" href="{% url 'home' %}">WC Finder</a> 
         <div class="ml-auto">
             {% if user.is_authenticated %}
                 <span class="navbar-text mr-3 saludo">¡Hola, {{ user.username }}!</span>
