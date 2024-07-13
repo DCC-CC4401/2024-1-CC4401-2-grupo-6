@@ -28,12 +28,14 @@ class BathroomForm(forms.ModelForm):
             'building': 'Edificio',
             'floor': 'Piso',
             'gender': 'Género',
-            'description': 'Descripción'
+            'description': 'Descripción',
+            'image': 'Foto'
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'building': forms.Select(attrs={'class': 'form-control'}),
             'floor': forms.Select(attrs={'class': 'form-control'}), 
             'gender': forms.Select(attrs={'class': 'form-control'}),
-            'description': forms.TextInput(attrs={'class': 'form-control'})
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'form-control'})
         }

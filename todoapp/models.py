@@ -58,5 +58,7 @@ class Bathroom(models.Model):
     # el formulario debe ser aceptado por un admin
     publicar = models.BooleanField(default=False)  
 
+    image = models.ImageField(upload_to='bathroom_images/', blank=True, null=True)
+
     def __str__(self):
-        return f"{self.name} - Edificio {self.building}, Piso {self.floor}, Descripcion {self.description} ,{self.get_gender_display()}"
+        return f"{self.name} - Edificio {self.building}, Piso {self.floor}, Descripcion {self.description}, Image {self.image} ,{self.get_gender_display()}"

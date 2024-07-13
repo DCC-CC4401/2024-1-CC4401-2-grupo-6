@@ -174,7 +174,7 @@ def home(request):
 
 def add_bathroom(request):
     if request.method == 'POST':
-        form = BathroomForm(request.POST)
+        form = BathroomForm(request.POST, request.FILES)
         if form.is_valid():
             # guardar form para que un admin marque true en la pagina de admin posteriormente
             bathroom = form.save(commit=False)
