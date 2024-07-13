@@ -32,14 +32,31 @@ class Bathroom(models.Model):
         ('851', '851'),
     ]
 
+    FLOOR_CHOICES = [
+        ('-3', '-3'),
+        ('-2', '-2'),
+        ('-1', '-1'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+    ]
+
+
     name = models.CharField(max_length=100)
     building = models.CharField(max_length=3, choices=BUILDS_CHOICES)
-    floor = models.IntegerField()
+
+    floor = models.CharField(max_length=2,choices=FLOOR_CHOICES)
+            
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
 
+    description = models.CharField(max_length=300)
 
     # el formulario debe ser aceptado por un admin
     publicar = models.BooleanField(default=False)  
 
     def __str__(self):
-        return f"{self.name} - Edificio {self.building}, Piso {self.floor}, {self.get_gender_display()}"
+        return f"{self.name} - Edificio {self.building}, Piso {self.floor}, Descripcion {self.description} ,{self.get_gender_display()}"

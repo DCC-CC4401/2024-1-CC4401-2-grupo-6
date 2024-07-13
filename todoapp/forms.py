@@ -22,16 +22,18 @@ class NuevaTareaModelForm(forms.ModelForm):
 class BathroomForm(forms.ModelForm):
     class Meta:
         model = Bathroom
-        fields = ['name', 'building', 'floor', 'gender']
+        fields = ['name', 'building', 'floor', 'gender', 'description']
         labels = {
             'name': 'Nombre',
             'building': 'Edificio',
             'floor': 'Piso',
             'gender': 'Género',
+            'description': 'Descripción'
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'building': forms.Select(attrs={'class': 'form-control'}),
-            'floor': forms.NumberInput(attrs={'class': 'form-control'}),
+            'floor': forms.Select(attrs={'class': 'form-control'}), 
             'gender': forms.Select(attrs={'class': 'form-control'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'})
         }
