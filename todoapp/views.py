@@ -164,3 +164,6 @@ def bathroom_list(request):
 def bathroom_detail(request, id):
     bathroom = Bathroom.objects.get(id=id)
     return render(request, 'todoapp/bathroom_detail.html', {'bathroom': bathroom})
+
+def home(request):
+    return render(request, 'todoapp/home_test.html')
