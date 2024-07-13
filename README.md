@@ -39,10 +39,7 @@ Para actualizar
 python manage.py makemigrations
 python manage.py migrate
 ```
-Para actualizar datos de baños
-```bash
-python manage.py load_bathrooms   
-```
+
 Para iniciar
 ```bash
 python manage.py runserver  

@@ -1,5 +1,6 @@
 from django import forms
 from .models import Tarea
+from .models import Bathroom
 from categorias.models import Categoria
 
 class NuevaTareaModelForm(forms.ModelForm):
@@ -17,3 +18,20 @@ class NuevaTareaModelForm(forms.ModelForm):
         if not "Baño" in field:
             raise forms.ValidationError("Debe incluir el texto 'Baño' en el título")
         return field
+
+class BathroomForm(forms.ModelForm):
+    class Meta:
+        model = Bathroom
+        fields = ['name', 'building', 'floor', 'gender']
+        labels = {
+            'name': 'Nombre',
+            'building': 'Edificio',
+            'floor': 'Piso',
+            'gender': 'Género',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'building': forms.Select(attrs={'class': 'form-control'}),
+            'floor': forms.NumberInput(attrs={'class': 'form-control'}),
+            'gender': forms.Select(attrs={'class': 'form-control'}),
+        }

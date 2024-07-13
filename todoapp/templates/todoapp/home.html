@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <!-- Enlace a la fuente Mulish desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <!-- Estilos CSS personalizados -->
+    <style>
+        body {
+            font-family: 'Mulish', sans-serif; /* Aplica la fuente Mulish al cuerpo del documento */
+        }
+        
+        /* Estilos para la barra de navegación */
+        .navbar-light .navbar-brand,
+        .navbar-light .navbar-nav .nav-link {
+            font-family: 'Mulish', sans-serif; /* Aplica la fuente Mulish a la barra de navegación */
+        }
+
+        /* Estilos para los botones */
+        .btn {
+            font-family: 'Mulish', sans-serif; /* Aplica la fuente Mulish a todos los botones */
+        }
+    </style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    {% include 'todoapp/_navbar.html' %}
+    
+    <!-- Contenido principal -->
+    <div class="container mt-5">
+        <h1 class="text-center">Bienvenido a WC Finder</h1>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <a href="{% url 'mis_tareas' %}" class="btn btn-primary btn-block">Formulario</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'register_user' %}" class="btn btn-secondary btn-block">Registrarse</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'login' %}" class="btn btn-success btn-block">Iniciar Sesión</a>
+            </div>
+            <div class="col-md-4 mt-4">
+                <a href="{% url 'bathroom_list' %}" class="btn btn-info btn-block">Lista de Baños</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

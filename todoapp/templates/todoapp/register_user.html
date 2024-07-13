@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <title>Registro</title>
+    <title>Registrarse</title>
 </head>
 <body>
     <div class="container">
@@ -50,6 +50,9 @@
                         <input type="email" class="form-control" id="mail" name="mail" placeholder="Mail" required>
                     </div>
                     <button type="submit" class="btn-common btn-success">Crear usuario</button>
+                    <div style="margin-top: 10px; text-align: center">
+                        <a href="{% url 'home' %}" style="color: blue;">Volver a inicio</a>
+                    </div>
                 </form>
             </div>
         </div>

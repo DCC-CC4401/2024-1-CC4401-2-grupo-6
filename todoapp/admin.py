@@ -3,12 +3,20 @@
 #pass: wcadmin
 
 from django.contrib import admin
-from todoapp.models import  User, Tarea, Bathroom
-#from categorias.models import Categoria
+from .models import User, Tarea, Bathroom
+from django.utils.translation import gettext_lazy as _
 
-#admin.site.register(Categoria)
 admin.site.register(User)
 admin.site.register(Tarea)
-admin.site.register(Bathroom)
 
-# Register your models here.
+class BathroomAdmin(admin.ModelAdmin):
+    list_display = ['name', 'building', 'floor', 'publicar']
+    list_filter = ['publicar']
+    actions = ['publicar_baños']
+
+    def publicar_baños(self, request, queryset):
+        queryset.update(publicar=True)
+        self.message_user(request, _('Los baños seleccionados han sido publicados.'))
+    publicar_baños.short_description = _('Marcar seleccionados como publicados')
+
+admin.site.register(Bathroom, BathroomAdmin)

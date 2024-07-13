@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import render, redirect
 
@@ -12,11 +10,14 @@ from django.contrib import messages
 from todoapp.models import Tarea
 from todoapp.models import User  
 from .models import Bathroom
+from .forms import BathroomForm
 
 from categorias.models import Categoria
 
 from todoapp.forms import NuevaTareaModelForm
 
+def home(request):
+    return render(request, 'todoapp/home.html')
 
 def tareas(request): #the index view
     #mis_tareas = Tarea.objects.all()  # quering all todos with the object manager
@@ -122,12 +123,15 @@ def forgot_password(request):
         
 
 def bathroom_list(request):
-    bathrooms = Bathroom.objects.all()
+    # Filtrar baños que estén marcados como publicados
+    bathrooms = Bathroom.objects.filter(publicar=True)
     
+    # Obtener opciones de filtrado y listas para la interfaz
     buildings = Bathroom.objects.values_list('building', flat=True).distinct()
     floors = Bathroom.objects.values_list('floor', flat=True).distinct().order_by('floor')
     genders = [choice[0] for choice in Bathroom.GENDER_CHOICES]
     
+    # Aplicar filtros si se reciben en la solicitud GET
     building_filter = request.GET.get('building')
     floor_filter = request.GET.get('floor')
     bathroom_filter = request.GET.get('bathroom')
@@ -145,6 +149,7 @@ def bathroom_list(request):
     if gender_filter:
         bathrooms = bathrooms.filter(gender=gender_filter)
 
+    # Obtener nombres de baños disponibles
     available_bathrooms = bathrooms.values_list('name', flat=True)
 
     context = {
@@ -160,10 +165,25 @@ def bathroom_list(request):
     }
     return render(request, 'todoapp/bathroom_list.html', context)
 
-
 def bathroom_detail(request, id):
     bathroom = Bathroom.objects.get(id=id)
     return render(request, 'todoapp/bathroom_detail.html', {'bathroom': bathroom})
 
 def home(request):
     return render(request, 'todoapp/home_test.html')
+
+def add_bathroom(request):
+    if request.method == 'POST':
+        form = BathroomForm(request.POST)
+        if form.is_valid():
+            # guardar form para que un admin marque true en la pagina de admin posteriormente
+            bathroom = form.save(commit=False)
+            bathroom.publicar = False  # Marcar como no revisado por defecto
+            form.save() # Guarda los datos en la base de datos si el formulario es válido
+            #return redirect('bathroom_list')  # Redirige a alguna otra vista o página
+            messages.success(request, 'El baño se ha agregado correctamente.')
+            return redirect('home') 
+    else:
+        form = BathroomForm()
+
+    return render(request, 'todoapp/add_bathroom.html', {'form': form})
