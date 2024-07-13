@@ -90,8 +90,13 @@
 
         <div class="window-container add-button-container">
             <aside class="add-button">
-                <p class="add-button-text">¿No encuentras tu baño preferido? ¡Agrega tu baño aquí!</p>
-                <a class="btn btn-primary btn-block" href="/add_bathroom">Agregar Baño</a>
+                {% if request.user.is_authenticated %}
+                    <p class="add-button-text">¿No encuentras tu baño preferido? ¡Agrega tu baño aquí!</p>
+                    <a class="btn btn-primary btn-block" href="/add_bathroom">Agregar Baño</a>  
+                {% else %}
+                    <p>Por favor, inicia sesión para agregar baños.</p>
+                    <a class="btn btn-primary btn-block" href="/add_bathroom">Registrarme</a>  
+                {% endif %}
             </aside>
         </div>
     </main>

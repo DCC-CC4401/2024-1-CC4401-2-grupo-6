@@ -210,17 +210,20 @@ def bathroom_detail(request, id):
     return render(request, 'todoapp/bathroom_detail.html', {'bathroom': bathroom})
 
 def add_bathroom(request):
-    if request.method == 'POST':
-        form = BathroomForm(request.POST)
-        if form.is_valid():
-            # guardar form para que un admin marque true en la pagina de admin posteriormente
-            bathroom = form.save(commit=False)
-            bathroom.publicar = False  # Marcar como no revisado por defecto
-            form.save() # Guarda los datos en la base de datos si el formulario es válido
-            #return redirect('bathroom_list')  # Redirige a alguna otra vista o página
-            messages.success(request, 'El baño se ha agregado correctamente.')
-            return redirect('home') 
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = BathroomForm(request.POST)
+            if form.is_valid():
+                # guardar form para que un admin marque true en la pagina de admin posteriormente
+                bathroom = form.save(commit=False)
+                bathroom.publicar = False  # Marcar como no revisado por defecto
+                form.save() # Guarda los datos en la base de datos si el formulario es válido
+                #return redirect('bathroom_list')  # Redirige a alguna otra vista o página
+                messages.success(request, 'El baño se ha agregado correctamente.')
+                return redirect('home') 
+        else:
+            form = BathroomForm()
+        return render(request, 'todoapp/add_bathroom.html', {'form': form})
     else:
-        form = BathroomForm()
-
-    return render(request, 'todoapp/add_bathroom.html', {'form': form})
+        messages.error(request, 'Debes estar registrado para poder agregar un baño.')
+        return redirect('login')
