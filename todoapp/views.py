@@ -170,7 +170,7 @@ def bathroom_detail(request, id):
     return render(request, 'todoapp/bathroom_detail.html', {'bathroom': bathroom})
 
 def home(request):
-    return render(request, 'todoapp/home_test.html')
+    return render(request, 'todoapp/home.html')
 
 def add_bathroom(request):
     if request.method == 'POST':

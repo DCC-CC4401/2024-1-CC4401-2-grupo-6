@@ -1,56 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
-    <!-- Enlace a la fuente Mulish desde Google Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baños Beauchef</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-    <!-- Estilos CSS personalizados -->
-    <style>
-        body {
-            font-family: 'Mulish', sans-serif; /* Aplica la fuente Mulish al cuerpo del documento */
-        }
-        
-        /* Estilos para la barra de navegación */
-        .navbar-light .navbar-brand,
-        .navbar-light .navbar-nav .nav-link {
-            font-family: 'Mulish', sans-serif; /* Aplica la fuente Mulish a la barra de navegación */
-        }
-
-        /* Estilos para los botones */
-        .btn {
-            font-family: 'Mulish', sans-serif; /* Aplica la fuente Mulish a todos los botones */
-        }
-    </style>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 </head>
 <body>
-    <!-- Barra de navegación -->
-    {% include 'todoapp/_navbar.html' %}
-    
-    <!-- Contenido principal -->
-    <div class="container mt-5">
-        <h1 class="text-center">Bienvenido a WC Finder</h1>
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <a href="{% url 'mis_tareas' %}" class="btn btn-primary btn-block">Formulario</a>
-            </div>
-            <div class="col-md-4">
-                <a href="{% url 'register_user' %}" class="btn btn-secondary btn-block">Registrarse</a>
-            </div>
-            <div class="col-md-4">
-                <a href="{% url 'login' %}" class="btn btn-success btn-block">Iniciar Sesión</a>
-            </div>
-            <div class="col-md-4 mt-4">
-                <a href="{% url 'bathroom_list' %}" class="btn btn-info btn-block">Lista de Baños</a>
-            </div>
+    <header class="window-container navbar">
+        <div class="navbar-brand">
+            <span class="app-title">Baños Beauchef</span>
         </div>
-    </div>
+        <div class="user-info">
+            <span class="username">Usuario</span>
+            <a href="#" class="logout-btn">Cerrar Sesión</a>
+        </div>
+        <div class="mobile-menu-toggle">
+            <button id="mobile-menu-btn">&#9776;</button>
+        </div>
+    </header>
 
-    <!-- Bootstrap JavaScript y dependencias -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <main class="container">
+        <div class="window-container filter-container">
+            <aside class="filter">
+                <h4>Filtro</h4>
+                <!-- Aquí va tu formulario de filtro -->
+            </aside>
+        </div>
+
+        <div class="window-container bathroom-list-container">
+            <section class="bathroom-list">
+                <h2>Lista de Imágenes</h2>
+                <!-- Aquí va la lista dinámica de imágenes -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Imagen 1</h5>
+                        <p class="card-text">Descripción de la imagen 1.</p>
+                    </div>
+                </div>
+                <!-- Repetir para cada imagen -->
+            </section>
+        </div>
+
+        <div class="window-container add-button-container">
+            <aside class="add-button">
+                <p class="add-button-text">¿No encuentras tu baño preferido? ¡Agrega tu baño aquí!</p>
+                <button class="btn btn-primary btn-block">Agregar Baño</button>
+            </aside>
+        </div>
+    </main>
+    
+    <!-- JavaScript para manejar el menú móvil -->
+    <script src="{% static 'js/home.js' %}"></script>
 </body>
 </html>
