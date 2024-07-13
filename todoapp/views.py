@@ -125,7 +125,7 @@ def login_user(request):
         usuario = authenticate(username=username,password=contraseña)
         if usuario is not None:
             login(request,usuario)
-            return HttpResponseRedirect('/tareas')
+            return HttpResponseRedirect('/home')
         else:
             return HttpResponseRedirect('/register')
 

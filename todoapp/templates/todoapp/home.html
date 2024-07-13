@@ -16,8 +16,13 @@
             <span class="app-title">Baños Beauchef</span>
         </div>
         <div class="user-info">
-            <span class="username">Usuario</span>
-            <a href="#" class="logout-btn">Cerrar Sesión</a>
+            {% if user.is_authenticated %}
+                <span class="username">Bienvenido, {{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="logout-btn">Iniciar Sesión</a>
+                <a href="{% url 'register_user' %}" class="logout-btn">Registrarse</a>
+            {% endif %}
         </div>
         <div class="mobile-menu-toggle">
             <button id="mobile-menu-btn">&#9776;</button>
@@ -70,11 +75,13 @@
                 <!-- Aquí va la lista dinámica de imágenes -->
                 <div class="card">
                     {% for bathroom in bathrooms %}
+                    <a href="/bathroom/{{ bathroom.id}}" class="card-link">
                     <div class="card-body">
                         <h5 class="card-title">{{ bathroom.name }}</h5>
                         <p class="card-text">Edificio {{ bathroom.building }}, Piso {{ bathroom.floor }}.</p>
                         <p class="card-text">Género: {{ bathroom.get_gender_display }}.</p>
                     </div>
+                    </a>
                     {% endfor %}
                 </div>
                 <!-- Repetir para cada imagen -->
@@ -84,12 +91,22 @@
         <div class="window-container add-button-container">
             <aside class="add-button">
                 <p class="add-button-text">¿No encuentras tu baño preferido? ¡Agrega tu baño aquí!</p>
-                <button class="btn btn-primary btn-block">Agregar Baño</button>
+                <a class="btn btn-primary btn-block" href="/add_bathroom">Agregar Baño</a>
             </aside>
         </div>
     </main>
     
     <!-- JavaScript para manejar el menú móvil -->
     <script src="{% static 'js/home.js' %}"></script>
+    <script>
+        // JavaScript to dynamically update floors and bathrooms based on building selection
+        document.getElementById('building').addEventListener('change', function() {
+            document.getElementById('filterForm').submit();
+        });
+
+        document.getElementById('floor').addEventListener('change', function() {
+            document.getElementById('filterForm').submit();
+        });
+    </script>
 </body>
 </html>
