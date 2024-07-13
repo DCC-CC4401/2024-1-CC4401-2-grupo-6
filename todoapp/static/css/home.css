@@ -149,6 +149,27 @@ body {
   box-sizing: border-box;
 }
 
+.filter select,
+.filter button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 16px; /* Ajusta según tu proyecto */
+    font-family: inherit; /* Usa la misma fuente que el resto del proyecto */
+}
+
+.filter button {
+    background-color: #007bff; /* Ajusta el color según tu proyecto */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filter button:hover {
+    background-color: #0056b3; /* Ajusta el color según tu proyecto */
+}
+
 .bathroom-list-container {
   flex: 1 1 60%; /* Ancho inicial del 60%, puede cambiar según el contenido */
   padding: 10px;
