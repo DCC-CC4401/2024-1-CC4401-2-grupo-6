@@ -15,6 +15,9 @@ from todoapp.models import User
 from .models import Bathroom
 from .forms import BathroomForm
 
+from django.core.paginator import Paginator
+from .forms import CommentForm
+
 from categorias.models import Categoria
 
 from todoapp.forms import NuevaTareaModelForm
@@ -209,6 +212,27 @@ def bathroom_list(request):
 
 def bathroom_detail(request, id):
     bathroom = Bathroom.objects.get(id=id)
+    comments = bathroom.comments.all().order_by('-created_at')
+
+    paginator = Paginator(comments, 5)  # 5 comentarios por página
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.bathroom = bathroom
+                comment.user = request.user
+                comment.save()
+                messages.success(request, 'Comentario agregado correctamente.')
+                return redirect('bathroom_detail', id=bathroom.id)
+        else:
+            messages.error(request, 'Debes estar registrado para poder comentar.')
+            return redirect('login')
+    else:
+        form = CommentForm()
 
     # Create map centered on the bathroom or default location
     m = folium.Map(location=[bathroom.latitude or -33.45767, bathroom.longitude or -70.66237], zoom_start=50, zoom_snap=0.5)
@@ -228,6 +252,8 @@ def bathroom_detail(request, id):
     context = {
         'bathroom': bathroom,
         'map_html': map_html,
+        'page_obj': page_obj,
+        'form': form,
     }
     
     return render(request, 'todoapp/bathroom_detail.html', context)
