@@ -10,7 +10,7 @@ admin.site.register(User)
 admin.site.register(Tarea)
 
 class BathroomAdmin(admin.ModelAdmin):
-    list_display = ['name', 'building', 'floor', 'publicar']
+    list_display = ['name', 'building', 'floor', 'latitude', 'longitude', 'publicar']
     list_filter = ['publicar']
     actions = ['publicar_baños']
 
@@ -20,3 +20,4 @@ class BathroomAdmin(admin.ModelAdmin):
     publicar_baños.short_description = _('Marcar seleccionados como publicados')
 
 admin.site.register(Bathroom, BathroomAdmin)
+

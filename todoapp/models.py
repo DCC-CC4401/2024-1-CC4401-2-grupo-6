@@ -40,6 +40,9 @@ class Bathroom(models.Model):
 
     # el formulario debe ser aceptado por un admin
     publicar = models.BooleanField(default=False)  
+    # agregar por el admin
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} - Edificio {self.building}, Piso {self.floor}, {self.get_gender_display()}"

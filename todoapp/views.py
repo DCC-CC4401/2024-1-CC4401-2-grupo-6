@@ -1,4 +1,7 @@
 # Create your views here.
+# mapa
+import folium
+
 from django.shortcuts import render, redirect
 
 from django.http import HttpResponseRedirect
@@ -128,7 +131,6 @@ def login_user(request):
             return HttpResponseRedirect('/home')
         else:
             return HttpResponseRedirect('/register')
-
  
 def logout_user(request):
     logout(request)
@@ -207,7 +209,28 @@ def bathroom_list(request):
 
 def bathroom_detail(request, id):
     bathroom = Bathroom.objects.get(id=id)
-    return render(request, 'todoapp/bathroom_detail.html', {'bathroom': bathroom})
+
+    # Create map centered on the bathroom or default location
+    m = folium.Map(location=[bathroom.latitude or -33.45767, bathroom.longitude or -70.66237], zoom_start=50, zoom_snap=0.5)
+    
+    # Add marker for the bathroom
+    if bathroom.latitude and bathroom.longitude:
+        folium.Marker(
+            [bathroom.latitude, bathroom.longitude],
+            popup=f"{bathroom.building}, Piso {bathroom.floor}, {bathroom.gender}",
+            #icon=folium.Icon(color='blue', icon='toilet-paper', prefix='fa')
+            icon=folium.Icon(color='blue', icon='restroom', prefix='fa')
+        ).add_to(m)
+    
+    # Get the HTML representation of the map
+    map_html = m._repr_html_()
+    
+    context = {
+        'bathroom': bathroom,
+        'map_html': map_html,
+    }
+    
+    return render(request, 'todoapp/bathroom_detail.html', context)
 
 def add_bathroom(request):
     if request.user.is_authenticated:
