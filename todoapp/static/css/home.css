@@ -228,6 +228,27 @@ body {
   border-color: var(--color-success-dark); /* Borde del mismo color en hover */
 }
 
+/* Especifica los estilos para los botones de inicio de sesión y registro */
+.login-btn {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.login-btn:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.register-btn {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.register-btn:hover {
+  background-color: var(--color-success-dark);
+  border-color: var(--color-success-dark);
+}
+
 @media (max-width: 768px) {
   .user-info {
     display: none; /* Ocultar por defecto en móvil */
