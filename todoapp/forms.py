@@ -22,7 +22,7 @@ class NuevaTareaModelForm(forms.ModelForm):
 class BathroomForm(forms.ModelForm):
     class Meta:
         model = Bathroom
-        fields = ['name', 'building', 'floor', 'gender', 'description']
+        fields = ['name', 'building', 'floor', 'gender', 'description', 'image']
         labels = {
             'name': 'Nombre',
             'building': 'Edificio',
