@@ -3,7 +3,7 @@
 #pass: wcadmin
 
 from django.contrib import admin
-from .models import User, Tarea, Bathroom, Comment
+from .models import Cleaning, User, Tarea, Bathroom, Comment
 from django.utils.translation import gettext_lazy as _
 
 admin.site.register(User)
@@ -33,3 +33,9 @@ class CommentAdmin(admin.ModelAdmin):
     borrar_comentarios_seleccionados.short_description = _('Eliminar comentarios seleccionados')
 
 admin.site.register(Comment, CommentAdmin)
+
+
+class CleaningAdmin(admin.ModelAdmin):
+    list_display=['id','bathroom', 'user', 'points']
+
+admin.site.register(Cleaning, CleaningAdmin)

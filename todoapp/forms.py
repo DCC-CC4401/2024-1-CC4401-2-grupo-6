@@ -1,5 +1,5 @@
 from django import forms
-from .models import Tarea
+from .models import Cleaning, Tarea
 from .models import Bathroom
 from .models import Comment
 from categorias.models import Categoria
@@ -21,6 +21,13 @@ class NuevaTareaModelForm(forms.ModelForm):
         return field
 
 class BathroomForm(forms.ModelForm):
+    cleaning_points = forms.IntegerField(
+        label='Limpieza',
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control',
+            'min': 1,
+            'max': 10,
+        }))
     class Meta:
         model = Bathroom
         fields = ['name', 'building', 'floor', 'gender']
@@ -47,3 +54,16 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ejemplo: Fui al baño y la luz estaba mala, etc.'}),
         }
+
+class CleaningForm(forms.ModelForm):
+    class Meta:
+        model = Cleaning
+        fields = ['points']
+        label ={
+            'points':'puntos'
+        }
+        widgets = {'content': forms.NumberInput(attrs={
+            'class': 'form-control',
+            'min': 1,
+            'max': 10
+        })}

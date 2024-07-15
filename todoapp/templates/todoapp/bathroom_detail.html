@@ -58,6 +58,14 @@
                 <p>Edificio: {{ bathroom.building }}</p>
                 <p>Piso: {{ bathroom.floor }}</p>
                 <p>Género: {{ bathroom.get_gender_display }}</p>
+                <p>Limpieza: {{ bathroom.average_cleaning_points}}</p>
+                {% if user.is_authenticated %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ reviewForm.as_p }}
+                        <button type="submit" name="submit_review" class="btn btn-primary">Enviar</button>
+                    </form>
+                {% endif %}
             </div>
             <div id="map">
                 {{ map_html|safe }}
@@ -70,7 +78,7 @@
                     <form method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" name="submit_comment" class="btn btn-primary">Enviar</button>
                     </form>
                 {% else %}
                     <p>Debes estar registrado para poder comentar. <a href="{% url 'login' %}">Iniciar sesión</a></p>

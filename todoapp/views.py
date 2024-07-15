@@ -12,8 +12,8 @@ from django.contrib import messages
 # Create your views here.
 from todoapp.models import Tarea
 from todoapp.models import User  
-from .models import Bathroom
-from .forms import BathroomForm
+from .models import Bathroom, Cleaning
+from .forms import BathroomForm, CleaningForm
 
 from django.core.paginator import Paginator
 from .forms import CommentForm
@@ -220,19 +220,32 @@ def bathroom_detail(request, id):
 
     if request.method == 'POST':
         if request.user.is_authenticated:
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                comment = form.save(commit=False)
-                comment.bathroom = bathroom
-                comment.user = request.user
-                comment.save()
-                messages.success(request, 'Comentario agregado correctamente.')
+            if "submit_comment" in request.POST:
+                form = CommentForm(request.POST)
+                if form.is_valid():
+                    comment = form.save(commit=False)
+                    comment.bathroom = bathroom
+                    comment.user = request.user
+                    comment.save()
+                    messages.success(request, 'Comentario agregado correctamente.')
+                    return redirect('bathroom_detail', id=bathroom.id)
+            elif "submit_review" in request.POST:
+                reviewForm= CleaningForm(request.POST)
+                if reviewForm.is_valid():
+                    review= reviewForm.save(commit=False)
+                    review.bathroom= bathroom
+                    review.user= request.user
+                    review.save()
+                    messages.success(request, 'Puntuación agregada correctamente.')
+                    return redirect('bathroom_detail', id=bathroom.id)
+            else:
                 return redirect('bathroom_detail', id=bathroom.id)
         else:
             messages.error(request, 'Debes estar registrado para poder comentar.')
             return redirect('login')
     else:
         form = CommentForm()
+        reviewForm = CleaningForm()
 
     # Create map centered on the bathroom or default location
     m = folium.Map(location=[bathroom.latitude or -33.45767, bathroom.longitude or -70.66237], zoom_start=50, zoom_snap=0.5)
@@ -254,6 +267,7 @@ def bathroom_detail(request, id):
         'map_html': map_html,
         'page_obj': page_obj,
         'form': form,
+        'reviewForm': reviewForm
     }
     
     return render(request, 'todoapp/bathroom_detail.html', context)
@@ -268,10 +282,12 @@ def add_bathroom(request):
                 bathroom.publicar = False  # Marcar como no revisado por defecto
                 form.save() # Guarda los datos en la base de datos si el formulario es válido
                 #return redirect('bathroom_list')  # Redirige a alguna otra vista o página
+                cleaning_point = form.cleaned_data['cleaning_points']
+                Cleaning.objects.create(bathroom=bathroom, user=request.user, points=cleaning_point)
                 messages.success(request, 'El baño se ha agregado correctamente.')
                 return redirect('home') 
         else:
-            form = BathroomForm()
+            review = CleaningForm()
         return render(request, 'todoapp/add_bathroom.html', {'form': form})
     else:
         messages.error(request, 'Debes estar registrado para poder agregar un baño.')
