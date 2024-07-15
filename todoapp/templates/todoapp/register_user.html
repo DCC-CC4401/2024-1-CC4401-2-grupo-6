@@ -50,10 +50,14 @@
                         <input type="email" class="form-control" id="mail" name="mail" placeholder="Mail" required>
                     </div>
                     <button type="submit" class="btn-common btn-success">Crear usuario</button>
+                    <div class="register-button">
+                        <a href="{% url 'login' %}" class="btn-common btn-primary">Iniciar Sesión</a>
+                    </div>
                     <div style="margin-top: 10px; text-align: center">
                         <a href="{% url 'home' %}" style="color: blue;">Volver a inicio</a>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

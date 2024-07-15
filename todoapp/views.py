@@ -71,10 +71,11 @@ def register_user(request):
 
      #Crear el nuevo usuario
      user = User.objects.create_user(username=nombre, password=contraseña, email=mail, apodo=apodo)
-     messages.success(request, 'Se creó el usuario para ' + user.apodo)
-
-     #Redireccionar la página /tareas
-     return HttpResponseRedirect('/tareas')
+     
+     messages.success(request, 'Se creó el usuario exitosamente ')
+    
+     #Redireccionar la página /login
+     return HttpResponseRedirect('/login')
 
 def login_user(request):
     if request.method == 'GET':
@@ -85,9 +86,10 @@ def login_user(request):
         usuario = authenticate(username=username,password=contraseña)
         if usuario is not None:
             login(request,usuario)
-            return HttpResponseRedirect('/tareas')
+            return HttpResponseRedirect('/add_bathroom')
         else:
-            return HttpResponseRedirect('/register')
+            messages.error(request, 'Usuario o contraseña incorrectos')
+            return HttpResponseRedirect('/login')
 
  
 def logout_user(request):
