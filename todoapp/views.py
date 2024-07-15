@@ -287,7 +287,8 @@ def add_bathroom(request):
                 messages.success(request, 'El baño se ha agregado correctamente.')
                 return redirect('home') 
         else:
-            review = CleaningForm()
+            #review = CleaningForm()  
+            form = BathroomForm()
         return render(request, 'todoapp/add_bathroom.html', {'form': form})
     else:
         messages.error(request, 'Debes estar registrado para poder agregar un baño.')
