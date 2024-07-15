@@ -120,7 +120,7 @@ def register_user(request):
      messages.success(request, 'Se creó el usuario para ' + user.apodo)
 
      #Redireccionar la página /tareas
-     return HttpResponseRedirect('/tareas')
+     return HttpResponseRedirect('/home')
 
 def login_user(request):
     if request.method == 'GET':
