@@ -258,6 +258,11 @@ body {
     display: block; /* Mostrar el botón de menú en móvil */
   }
 
+  .user-info-movil {
+    flex-direction: column;
+    display: flex;
+  }
+
   .container {
     flex-direction: column;
   }

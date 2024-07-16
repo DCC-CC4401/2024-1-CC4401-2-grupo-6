@@ -101,6 +101,19 @@
             </aside>
         </div>
     </main>
+    <div class="mobile-menu" id="mobile-menu-content">
+        <div class="user-info-movil">
+            {% if user.is_authenticated %}
+                <span class="username">Bienvenido, {{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="logout-btn login-btn">Iniciar Sesión</a>
+                <a href="{% url 'register_user' %}" class="logout-btn register-btn">Registrarse</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
     
     <!-- JavaScript para manejar el menú móvil -->
     <script src="{% static 'js/home.js' %}"></script>
