@@ -272,6 +272,68 @@ def bathroom_detail(request, id):
     
     return render(request, 'todoapp/bathroom_detail.html', context)
 
+def bathroom_detail2(request, id):
+    bathroom = Bathroom.objects.get(id=id)
+    comments = bathroom.comments.all().order_by('-created_at')
+
+    paginator = Paginator(comments, 5)  # 5 comentarios por página
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            if "submit_comment" in request.POST:
+                form = CommentForm(request.POST)
+                if form.is_valid():
+                    comment = form.save(commit=False)
+                    comment.bathroom = bathroom
+                    comment.user = request.user
+                    comment.save()
+                    messages.success(request, 'Comentario agregado correctamente.')
+                    return redirect('bathroom_detail', id=bathroom.id)
+            elif "submit_review" in request.POST:
+                reviewForm= CleaningForm(request.POST)
+                if reviewForm.is_valid():
+                    review= reviewForm.save(commit=False)
+                    review.bathroom= bathroom
+                    review.user= request.user
+                    review.save()
+                    messages.success(request, 'Puntuación agregada correctamente.')
+                    return redirect('bathroom_detail', id=bathroom.id)
+            else:
+                return redirect('bathroom_detail', id=bathroom.id)
+        else:
+            messages.error(request, 'Debes estar registrado para poder comentar.')
+            return redirect('login')
+    else:
+        form = CommentForm()
+        reviewForm = CleaningForm()
+
+    # Create map centered on the bathroom or default location
+    m = folium.Map(location=[bathroom.latitude or -33.45767, bathroom.longitude or -70.66237], zoom_start=50, zoom_snap=0.5)
+    
+    # Add marker for the bathroom
+    if bathroom.latitude and bathroom.longitude:
+        folium.Marker(
+            [bathroom.latitude, bathroom.longitude],
+            popup=f"{bathroom.building}, Piso {bathroom.floor}, {bathroom.gender}",
+            #icon=folium.Icon(color='blue', icon='toilet-paper', prefix='fa')
+            icon=folium.Icon(color='blue', icon='restroom', prefix='fa')
+        ).add_to(m)
+    
+    # Get the HTML representation of the map
+    map_html = m._repr_html_()
+    
+    context = {
+        'bathroom': bathroom,
+        'map_html': map_html,
+        'page_obj': page_obj,
+        'form': form,
+        'reviewForm': reviewForm
+    }
+    
+    return render(request, 'todoapp/bathroom_detail2.html', context)
+
 def add_bathroom(request):
     if request.user.is_authenticated:
         if request.method == 'POST':

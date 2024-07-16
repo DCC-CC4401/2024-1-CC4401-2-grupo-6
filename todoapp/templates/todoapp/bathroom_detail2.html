@@ -1,0 +1,116 @@
+{% extends 'todoapp/navbar.html' %}
+
+{% block title %}{{ bathroom.name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+        body {
+            font-family: 'Mulish', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            max-width: 1200px; /* Ajusta el ancho máximo según sea necesario */
+            margin: 0 auto; /* Centra el contenido */
+            margin-top: 60px;
+        }
+        .details-map {
+            display: flex;
+            flex-wrap: wrap; /* Permite que los elementos se ajusten automáticamente */
+            gap: 20px; /* Espacio entre las columnas */
+        }
+        .details {
+            flex: 1 1 45%; /* Ocupa el 45% del espacio disponible */
+        }
+        #map {
+            flex: 1 1 50%; /* Ocupa el 50% del espacio disponible */
+            height: 400px; /* Ajusta la altura según sea necesario */
+        }
+        .comments-section {
+            margin-top: 20px;
+        }
+        .comment {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .comment-form {
+            margin-bottom: 20px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="details-map">
+            <div class="details">
+                <h1>{{ bathroom.name }}</h1>
+                <p>Edificio: {{ bathroom.building }}</p>
+                <p>Piso: {{ bathroom.floor }}</p>
+                <p>Género: {{ bathroom.get_gender_display }}</p>
+                <p>Limpieza: {{ bathroom.average_cleaning_points}}</p>
+                {% if user.is_authenticated %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ reviewForm.as_p }}
+                        <button type="submit" name="submit_review" class="btn btn-primary">Enviar</button>
+                    </form>
+                {% endif %}
+            </div>
+            <div id="map">
+                {{ map_html|safe }}
+            </div>
+        </div>
+        <div class="comments-section">
+            <h3>Agrega un comentario</h3>
+            <div class="comment-form">
+                {% if user.is_authenticated %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" name="submit_comment" class="btn btn-primary">Enviar</button>
+                    </form>
+                {% else %}
+                    <p>Debes estar registrado para poder comentar. <a href="{% url 'login' %}">Iniciar sesión</a></p>
+                {% endif %}
+            </div>
+            <h2>Comentarios</h2>
+            {% for comment in page_obj %}
+                <div class="comment">
+                    <p><strong>{{ comment.user.username }}</strong> ({{ comment.created_at }}):</p>
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; primero</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">siguiente</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">último &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

@@ -1,35 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WC Finder Beauchef</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
-</head>
-<body>
-    <header class="window-container navbar">
-        <div class="navbar-brand">
-            <span class="app-title">WC Finder Beauchef</span>
-        </div>
-        <div class="user-info">
-            {% if user.is_authenticated %}
-                <span class="username">Bienvenido, {{ user.username }}</span>
-                <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
-            {% else %}
-                <a href="{% url 'login' %}" class="logout-btn login-btn">Iniciar Sesión</a>
-                <a href="{% url 'register_user' %}" class="logout-btn register-btn">Registrarse</a>
-            {% endif %}
-        </div>
-        <div class="mobile-menu-toggle">
-            <button id="mobile-menu-btn">&#9776;</button>
-        </div>
-    </header>
+{% extends 'todoapp/navbar.html' %}
 
-    <main class="container">
+{% block title %}WC Finder Home{% endblock %}
+
+{% block content %}
         <div class="window-container filter-container">
             <aside class="filter">
                 <h4>Filtro</h4>
@@ -101,35 +74,6 @@
             </aside>
         </div>
     </main>
-    <div class="mobile-menu" id="mobile-menu-content">
-        <div class="user-info-movil">
-            {% if user.is_authenticated %}
-                <span class="username">Bienvenido, {{ user.username }}</span>
-                <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
-            {% else %}
-                <a href="{% url 'login' %}" class="logout-btn login-btn">Iniciar Sesión</a>
-                <a href="{% url 'register_user' %}" class="logout-btn register-btn">Registrarse</a>
-            {% endif %}
-        </div>
-    </div>
-    <div class="overlay" id="overlay"></div>
+{% endblock %}
 
-    
-    <!-- JavaScript para manejar el menú móvil -->
-    <script src="{% static 'js/home.js' %}"></script>
-    <script>
-        // JavaScript to dynamically update floors and bathrooms based on building selection
-        document.getElementById('building').addEventListener('change', function() {
-            document.getElementById('filterForm').submit();
-        });
 
-        document.getElementById('floor').addEventListener('change', function() {
-            document.getElementById('filterForm').submit();
-        });
-
-        document.getElementById('gender').addEventListener('change', function() {
-            document.getElementById('filterForm').submit();
-        });
-    </script>
-</body>
-</html>

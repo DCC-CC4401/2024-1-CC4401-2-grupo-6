@@ -11,4 +11,5 @@ urlpatterns = [
     #path('list', views.bathroom_list, name='bathroom_list'),
     path('bathroom/<int:id>/', views.bathroom_detail, name='bathroom_detail'),
     path('home', views.home, name='home'),
+    path('bathroom2/<int:id>/', views.bathroom_detail2, name='bathroom_detail2'),
 ]         
