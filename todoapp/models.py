@@ -48,6 +48,7 @@ class Bathroom(models.Model):
 
 
     name = models.CharField(max_length=100)
+
     building = models.CharField(max_length=3, choices=BUILDS_CHOICES)
 
     floor = models.CharField(max_length=2,choices=FLOOR_CHOICES)
@@ -65,7 +66,7 @@ class Bathroom(models.Model):
     longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name} - Edificio {self.building}, Piso {self.floor}, Descripcion {self.description}, Image {self.image}, {self.get_gender_display()}"
+        return f"{self.name} - Edificio {self.building}, Piso {self.floor}, {self.get_gender_display()}"
     
     def average_cleaning_points(self):
         average = self.cleaning_reviews.aggregate(Avg('points'))['points__avg']
