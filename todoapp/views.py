@@ -69,13 +69,18 @@ def register_user(request):
      #pronombre = request.POST['pronombre']
      mail = request.POST['mail']
 
-     #Crear el nuevo usuario
-     user = User.objects.create_user(username=nombre, password=contraseña, email=mail, apodo=apodo)
-     
-     messages.success(request, 'Se creó el usuario exitosamente ')
-    
-     #Redireccionar la página /login
-     return HttpResponseRedirect('/login')
+    try:
+        # Crear el nuevo usuario
+        user = User.objects.create_user(username=nombre, password=contraseña, email=mail)
+        user.apodo = apodo
+        user.pronombre = pronombre
+        user.save()
+        messages.success(request, 'Se creó el usuario para ' + user.apodo)
+        # Redireccionar la página /tareas
+        return HttpResponseRedirect('/tareas')
+    except Exception as e:
+        messages.error(request, 'Hubo un error al crear el usuario: ' + str(e))
+        return render(request, "todoapp/register_user.html")
 
 def login_user(request):
     if request.method == 'GET':
@@ -88,8 +93,8 @@ def login_user(request):
             login(request,usuario)
             return HttpResponseRedirect('/add_bathroom')
         else:
-            messages.error(request, 'Usuario o contraseña incorrectos')
-            return HttpResponseRedirect('/login')
+            error_message = "Usuario o contraseña incorrectos."
+            return render(request, 'login.html', {'error_message': error_message})
 
  
 def logout_user(request):

@@ -21,6 +21,12 @@
         <div class="login-form">
             <div class="form-container">
                 <h2>Registro</h2>
+                <!-- Contenedor para mensajes de éxito -->
+                {% if success_message %}
+                <div class="message success-message">
+                    {{ success_message }}
+                </div>
+                {% endif %}
                 <form method="post">
                     {% csrf_token %}
                     <div class="form-group">
