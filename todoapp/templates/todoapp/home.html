@@ -3,77 +3,147 @@
 {% block title %}WC Finder Home{% endblock %}
 
 {% block content %}
-        <div class="window-container filter-container">
-            <aside class="filter">
-                <h4>Filtro</h4>
-                <form method="get" id="filterForm">
-                    <label for="building">Edificio:</label>
-                    <select name="building" id="building">
-                        <option value="">Todos los edificios</option>
-                        {% for building in buildings %}
-                            <option value="{{ building }}" {% if building == selected_building %}selected{% endif %}>
-                                {{ building }}
-                            </option>
-                        {% endfor %}
-                    </select>
-            
-                    <label for="floor">Piso:</label>
-                    <select name="floor" id="floor">
-                        <option value="">Todos los pisos</option>
-                        {% for floor in floors %}
-                            <option value="{{ floor }}" {% if floor|stringformat:"i" == selected_floor %}selected{% endif %}>
-                                {{ floor }}
-                            </option>
-                        {% endfor %}
-                    </select>
-            
-                    <label for="gender">Género:</label>
-                    <select name="gender" id="gender">
-                        <option value="">Todos los géneros</option>
-                        {% for gender in genders %}
-                            <option value="{{ gender }}" {% if gender == selected_gender %}selected{% endif %}>
-                                {{ gender|title }}
-                            </option>
-                        {% endfor %}
-                    </select>
-            
-                    <button type="submit">Filtrar</button>
-                </form>
-            </aside>
-        </div>
+    <div class="window-container filter-container">
+        <aside class="filter">
+            <h4>Filtro</h4>
+            <form method="get" id="filterForm">
+                <label for="building">Edificio:</label>
+                <select name="building" id="building">
+                    <option value="">Todos los edificios</option>
+                    {% for building in buildings %}
+                        <option value="{{ building }}" {% if building == selected_building %}selected{% endif %}>
+                            {{ building }}
+                        </option>
+                    {% endfor %}
+                </select>
 
-        <div class="window-container bathroom-list-container">
-            <section class="bathroom-list">
-                <h2>Lista de Baños</h2>
-                <!-- Aquí va la lista dinámica de imágenes -->
-                <div class="card">
-                    {% for bathroom in bathrooms %}
-                    <a href="/bathroom/{{ bathroom.id}}" class="card-link">
+                <label for="floor">Piso:</label>
+                <select name="floor" id="floor">
+                    <option value="">Todos los pisos</option>
+                    {% for floor in floors %}
+                        <option value="{{ floor }}" {% if floor|stringformat:"i" == selected_floor %}selected{% endif %}>
+                            {{ floor }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <label for="gender">Género:</label>
+                <select name="gender" id="gender">
+                    <option value="">Todos los géneros</option>
+                    {% for gender in genders %}
+                        <option value="{{ gender }}" {% if gender == selected_gender %}selected{% endif %}>
+                            {{ gender|title }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">Filtrar</button>
+            </form>
+        </aside>
+    </div>
+
+    <div class="window-container bathroom-list-container">
+        <section class="bathroom-list">
+            <h2>Lista de Baños</h2>
+            <div id="bathroom-list">
+                {% for bathroom in bathrooms %}
+                <a href="/bathroom/{{ bathroom.id}}" class="card-link">
                     <div class="card-body">
                         <h5 class="card-title">{{ bathroom.name }}</h5>
                         <p class="card-text">Edificio {{ bathroom.building }}, Piso {{ bathroom.floor }}.</p>
                         <p class="card-text">Género: {{ bathroom.get_gender_display }}.</p>
                     </div>
-                    </a>
-                    {% endfor %}
-                </div>
-                <!-- Repetir para cada imagen -->
-            </section>
-        </div>
+                </a>
+                {% endfor %}
 
-        <div class="window-container add-button-container">
-            <aside class="add-button">
-                {% if request.user.is_authenticated %}
-                    <p class="add-button-text">¿No encuentras tu baño preferido? ¡Agrega tu baño aquí!</p>
-                    <a class="btn btn-primary btn-block" href="/add_bathroom">Agregar Baño</a>  
-                {% else %}
-                    <p>Por favor, inicia sesión o regístrate para agregar baños.</p>
-                    <a class="btn btn-primary btn-block login-btn" href="/login">Iniciar sesión</a>  
-                    <a class="btn btn-primary btn-block register-btn" href="/register">Registrarme</a>  
-                {% endif %}
-            </aside>
-        </div>
-    </main>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if bathrooms.has_previous %}
+                            <a href="?page=1" class="pagination-link" data-page="1">&laquo; primera</a>
+                            <a href="?page={{ bathrooms.previous_page_number }}" class="pagination-link" data-page="{{ bathrooms.previous_page_number }}">anterior</a>
+                        {% endif %}
+                
+                        <span class="current">
+                            Página {{ bathrooms.number }} de {{ bathrooms.paginator.num_pages }}.
+                        </span>
+                
+                        {% if bathrooms.has_next %}
+                            <a href="?page={{ bathrooms.next_page_number }}" class="pagination-link" data-page="{{ bathrooms.next_page_number }}">siguiente</a>
+                            <a href="?page={{ bathrooms.paginator.num_pages }}" class="pagination-link" data-page="{{ bathrooms.paginator.num_pages }}">última &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>                
+            </div>
+        </section>
+    </div>
+
+    <div class="window-container add-button-container">
+        <aside class="add-button">
+            {% if request.user.is_authenticated %}
+                <p class="add-button-text">¿No encuentras tu baño preferido? ¡Agrega tu baño aquí!</p>
+                <a class="btn btn-primary btn-block" href="/add_bathroom">Agregar Baño</a>  
+            {% else %}
+                <p>Por favor, inicia sesión o regístrate para agregar baños.</p>
+                <a class="btn btn-primary btn-block login-btn" href="/login">Iniciar sesión</a>  
+                <a class="btn btn-primary btn-block register-btn" href="/register">Registrarme</a>  
+            {% endif %}
+        </aside>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const paginationLinks = document.querySelectorAll('.pagination-link');
+
+            paginationLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('page', page);
+
+                    fetch(url, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newBathroomList = doc.getElementById('bathroom-list').innerHTML;
+                        document.getElementById('bathroom-list').innerHTML = newBathroomList;
+                        window.history.pushState({}, '', url);
+                        updatePaginationLinks();
+                    });
+                });
+            });
+
+            function updatePaginationLinks() {
+                const newLinks = document.querySelectorAll('.pagination-link');
+                newLinks.forEach(link => {
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const page = this.dataset.page;
+                        const url = new URL(window.location.href);
+                        url.searchParams.set('page', page);
+
+                        fetch(url, {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+                            const newBathroomList = doc.getElementById('bathroom-list').innerHTML;
+                            document.getElementById('bathroom-list').innerHTML = newBathroomList;
+                            window.history.pushState({}, '', url);
+                            updatePaginationLinks();
+                        });
+                    });
+                });
+            }
+        });
+    </script>
 {% endblock %}
-
-

@@ -15,7 +15,7 @@ from todoapp.models import User
 from .models import Bathroom, Cleaning
 from .forms import BathroomForm, CleaningForm
 
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CommentForm
 
 from categorias.models import Categoria
@@ -52,6 +52,16 @@ def home(request):
     # Obtener nombres de baños disponibles
     available_bathrooms = bathrooms.values_list('name', flat=True)
 
+    paginator = Paginator(bathrooms, 10)  # 10 baños por página
+    page = request.GET.get('page')
+
+    try:
+        bathrooms = paginator.page(page)
+    except PageNotAnInteger:
+        bathrooms = paginator.page(1)
+    except EmptyPage:
+        bathrooms = paginator.page(paginator.num_pages)
+
     context = {
         'bathrooms': bathrooms,
         'buildings': buildings,
@@ -63,6 +73,10 @@ def home(request):
         'selected_bathroom': bathroom_filter,
         'selected_gender': gender_filter,
     }
+
+    if request.is_ajax():
+        return render(request, 'todoapp/home.html', context)
+    
     return render(request, 'todoapp/home.html', context)
 
 def tareas(request): #the index view

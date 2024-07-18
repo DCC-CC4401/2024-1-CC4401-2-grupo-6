@@ -149,6 +149,21 @@ body {
   flex: 1 1 20%; /* Ancho inicial del 20%, puede cambiar según el contenido */
   padding: 10px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+  text-align: center; /* Centra el texto */
+}
+
+.filter {
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.filter h4 {
+  margin: 0; /* Ajusta el margen superior e inferior */
+  padding: 10px; /* Ajusta el padding superior e inferior */
 }
 
 .filter select,
@@ -283,4 +298,33 @@ body {
     padding: 10px; /* Ajusta el padding según necesidad */
     box-sizing: border-box;
   }
+}
+
+/* Estilos para paginación */
+
+.pagination {
+  text-align: center; /* Centra el texto horizontalmente */
+  margin-top: 20px; /* Añade un margen superior para separación */
+}
+
+.pagination .step-links {
+  display: inline-block; /* Permite centrado del contenido */
+  padding: 10px; /* Añade padding para mejor apariencia */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: var(--color-bg-light-gray); /* Fondo gris claro */
+}
+
+.pagination a {
+  color: var(--color-primary); /* Color de los enlaces */
+  text-decoration: none; /* Sin subrayado */
+  margin: 0 5px; /* Espaciado horizontal entre enlaces */
+}
+
+.pagination a:hover {
+  text-decoration: underline; /* Subrayado al pasar el mouse */
+}
+
+.pagination .current {
+  font-weight: bold; /* Negrita para la página actual */
+  margin: 0 5px; /* Espaciado horizontal */
 }

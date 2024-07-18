@@ -34,7 +34,6 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Comment, CommentAdmin)
 
-
 class CleaningAdmin(admin.ModelAdmin):
     list_display=['id','bathroom', 'user', 'points']
 
