@@ -30,7 +30,10 @@ SECRET_KEY = 'your secret key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Configure default primary key for all models
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition

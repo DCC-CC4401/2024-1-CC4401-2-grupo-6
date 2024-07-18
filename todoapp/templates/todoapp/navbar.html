@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Navbar template{%endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <header class="window-container navbar">
+        <div class="navbar-brand">
+            <span class="app-title">WC Finder Beauchef</span>
+        </div>
+        <div class="user-info">
+            {% if user.is_authenticated %}
+                <span class="username">¡Hola, {{ user.username }}!</span>
+                <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="logout-btn login-btn">Iniciar Sesión</a>
+                <a href="{% url 'register_user' %}" class="logout-btn register-btn">Registrarse</a>
+            {% endif %}
+        </div>
+        <div class="mobile-menu-toggle">
+            <button id="mobile-menu-btn">&#9776;</button>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="container">
+      {% block content %}
+      
+      {% endblock %}
+    </main>
+
+    <!-- Menú móvil -->
+    <div class="mobile-menu" id="mobile-menu-content">
+        <div class="user-info-movil">
+            {% if user.is_authenticated %}
+                <span class="username">¡Hola, {{ user.username }}!</span>
+                <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="logout-btn login-btn">Iniciar Sesión</a>
+                <a href="{% url 'register_user' %}" class="logout-btn register-btn">Registrarse</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    
+    <!-- JavaScript para manejar el menú móvil -->
+    <script src="{% static 'js/home.js' %}"></script>
+    <script src="{% static 'js/filter.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

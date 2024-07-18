@@ -1,0 +1,330 @@
+/* styles2.css */
+
+/* Reset de estilos y variables */
+:root {
+  --font-main: 'Mulish', sans-serif;
+  --color-primary: #007bff;
+  --color-primary-dark: #0056b3;
+  --color-success: #28a745;
+  --color-success-dark: #218838;
+  --color-border: #ccc;
+  --color-bg: #ffffff;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-bg-light-gray: #f8f9fa; /* Gris casi blanco */
+  --color-aliceblue: #f0f8ff;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-aliceblue);
+  margin: 0;
+  padding: 0;
+  font-size: 18px; /* Tamaño de letra base aumentado */
+}
+
+/* Estilo de ventana */
+.window-container {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px var(--color-shadow);
+  margin: 10px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: white; /* Cambia el color de fondo a blanco */
+  color: black; /* Cambia el color del texto a negro */
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px; /* Añade borde redondeado */
+  box-shadow: 0px 0px 10px var(--color-shadow); /* Añade sombra */
+  margin: 10px; /* Reducir los márgenes */
+}
+
+.navbar-brand {
+  font-size: 2rem; /* Aumenta el tamaño de la fuente */
+  font-weight: bold;
+  margin: 0; /* Elimina el margen por defecto */
+  text-align: center; /* Alinea el texto al centro */
+  flex: 1; /* Expande este elemento para ocupar el espacio restante */
+}
+
+.user-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  
+}
+
+.username {
+  margin-right: 10px;
+  font-size: 1.2rem; /* Aumenta el tamaño de la fuente */
+}
+
+.logout-btn {
+  color: white; /* Color del texto */
+  text-decoration: none;
+  padding: 10px 20px; /* Aumenta el tamaño del padding */
+  font-size: 1rem; /* Aumenta el tamaño de la fuente */
+  background-color: var(--color-primary); /* Color azul primario */
+  border: 1px solid var(--color-primary); /* Borde igual al color de fondo */
+  border-radius: 5px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #f08080; /* Cambia el color de fondo al pasar el ratón a un tono de rojo suave */
+  border-color: #fff0f5; /* Cambia el color del borde al pasar el ratón a un tono de rojo suave */
+}
+
+/* Mobile menu */
+.mobile-menu-toggle {
+  display: none; /* Ocultar por defecto */
+}
+
+.mobile-menu-toggle button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+
+.mobile-menu.show {
+  display: block;
+  transform: translateX(0);
+}
+
+.mobile-menu .user-info {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mobile-menu .logout-btn {
+  margin-top: 10px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+}
+
+.overlay.show {
+  display: block;
+}
+
+/* Estilos para los contenedores */
+.container {
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos horizontalmente */
+  margin: 10px; /* Ajusta los márgenes */
+  align-items: flex-start; /* Alinea los elementos en la parte superior */
+}
+
+.filter-container {
+  flex: 1 1 20%; /* Ancho inicial del 20%, puede cambiar según el contenido */
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+  text-align: center; /* Centra el texto */
+}
+
+.filter {
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.filter h4 {
+  margin: 0; /* Ajusta el margen superior e inferior */
+  padding: 10px; /* Ajusta el padding superior e inferior */
+}
+
+.filter select,
+.filter button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 16px; /* Ajusta según tu proyecto */
+    font-family: inherit; /* Usa la misma fuente que el resto del proyecto */
+}
+
+.filter button {
+    background-color: #007bff; /* Ajusta el color según tu proyecto */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filter button:hover {
+    background-color: #0056b3; /* Ajusta el color según tu proyecto */
+}
+
+.bathroom-list-container {
+  flex: 1 1 60%; /* Ancho inicial del 60%, puede cambiar según el contenido */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.card-title {
+  font-size: 20px; /* Cambia el tamaño según tus necesidades */
+}
+
+.card-text {
+  font-size: 16px; /* Cambia el tamaño según tus necesidades */
+}
+
+.card-link {
+  text-decoration: none; /* Para eliminar el subrayado */
+  color: inherit; /* Para que el color del texto no cambie */
+  display: block; /* Para que el enlace ocupe todo el espacio del div */
+}
+
+.card-link:hover {
+  text-decoration: none; /* Asegura que no aparezca subrayado al pasar el mouse */
+}
+
+.add-button-container {
+  flex: 1 1 20%; /* Ancho inicial del 20%, puede cambiar según el contenido */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.add-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* Centra el contenido horizontalmente */
+  text-decoration: none;
+}
+
+.add-button .btn {
+  background-color: var(--color-success); /* Verde success */
+  border: 1px solid var(--color-success); /* Borde del mismo color */
+  color: white; /* Color del texto */
+  padding: 12px 24px; /* Aumenta el tamaño del padding */
+  font-size: 1.2rem; /* Aumenta el tamaño de la fuente */
+  border-radius: 5px;
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  font-weight: bold; /* Pone la letra en negrita */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  text-decoration: none;
+}
+
+.add-button .btn:hover {
+  background-color: var(--color-success-dark); /* Verde más oscuro en hover */
+  border-color: var(--color-success-dark); /* Borde del mismo color en hover */
+}
+
+/* Especifica los estilos para los botones de inicio de sesión y registro */
+.login-btn {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.login-btn:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.register-btn {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.register-btn:hover {
+  background-color: var(--color-success-dark);
+  border-color: var(--color-success-dark);
+}
+
+@media (max-width: 768px) {
+  .user-info {
+    display: none; /* Ocultar por defecto en móvil */
+  }
+
+  .mobile-menu-toggle {
+    display: block; /* Mostrar el botón de menú en móvil */
+  }
+
+  .user-info-movil {
+    flex-direction: column;
+    display: flex;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .add-button-container {
+    order: 1;
+  }
+
+  .filter-container {
+    order: 2;
+  }
+
+  .bathroom-list-container {
+    order: 3;
+    flex: 1 1 100%; /* Ocupa todo el ancho disponible en móvil */
+    padding: 10px; /* Ajusta el padding según necesidad */
+    box-sizing: border-box;
+  }
+}
+
+/* Estilos para paginación */
+
+.pagination {
+  text-align: center; /* Centra el texto horizontalmente */
+  margin-top: 20px; /* Añade un margen superior para separación */
+}
+
+.pagination .step-links {
+  display: inline-block; /* Permite centrado del contenido */
+  padding: 10px; /* Añade padding para mejor apariencia */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: var(--color-bg-light-gray); /* Fondo gris claro */
+}
+
+.pagination a {
+  color: var(--color-primary); /* Color de los enlaces */
+  text-decoration: none; /* Sin subrayado */
+  margin: 0 5px; /* Espaciado horizontal entre enlaces */
+}
+
+.pagination a:hover {
+  text-decoration: underline; /* Subrayado al pasar el mouse */
+}
+
+.pagination .current {
+  font-weight: bold; /* Negrita para la página actual */
+  margin: 0 5px; /* Espaciado horizontal */
+}

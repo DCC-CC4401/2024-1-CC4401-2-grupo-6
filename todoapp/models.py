@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from categorias.models import Categoria
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Avg
 
 class User(AbstractUser):
   pronombres = [('La','La'),('El','El'), ('Le','Le'),('Otro','Otro')]
@@ -55,10 +56,36 @@ class Bathroom(models.Model):
 
     description = models.CharField(max_length=300)
 
-    # el formulario debe ser aceptado por un admin
-    publicar = models.BooleanField(default=False)  
-
     image = models.ImageField(upload_to='bathroom_images/', blank=True, null=True)
 
+    # el formulario debe ser aceptado por un admin
+    publicar = models.BooleanField(default=False)  
+    # agregar por el admin
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+
     def __str__(self):
-        return f"{self.name} - Edificio {self.building}, Piso {self.floor}, Descripcion {self.description}, Image {self.image} ,{self.get_gender_display()}"
+        return f"{self.name} - Edificio {self.building}, Piso {self.floor}, Descripcion {self.description}, Image {self.image}, {self.get_gender_display()}"
+    
+    def average_cleaning_points(self):
+        average = self.cleaning_reviews.aggregate(Avg('points'))['points__avg']
+        return average
+    
+    def print_test(self):
+        return self.cleaning_reviews.all()
+
+class Comment(models.Model):
+    bathroom = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Comment by {self.user.username} on {self.bathroom.name}"
+
+class Cleaning(models.Model):
+    bathroom = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name='cleaning_reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    points= models.IntegerField()
+    def __str__(self):
+        return f"{self.user.username} calificó con {self.points} el baño{self.bathroom.name} "
