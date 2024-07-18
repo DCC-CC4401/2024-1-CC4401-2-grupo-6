@@ -21,12 +21,11 @@
         <div class="login-form">
             <div class="form-container">
                 <h2>WC Finder Beauchef</h2>
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}" role="alert">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
+                <!-- Contenedor para mensajes de error -->
+                {% if error_message %}
+                <div class="message error-message">
+                    {{ error_message }}
+                </div>
                 {% endif %}
                 <form method="post">
                     {% csrf_token %}
