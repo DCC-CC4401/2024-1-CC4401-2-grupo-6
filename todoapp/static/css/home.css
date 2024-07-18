@@ -328,3 +328,15 @@ body {
   font-weight: bold; /* Negrita para la página actual */
   margin: 0 5px; /* Espaciado horizontal */
 }
+
+/* Estilo personalizado para el título del navbar */
+.navbar-brand .app-title {
+  color: black; /* Color de texto negro */
+  text-decoration: none; /* Sin subrayado */
+  font-size: 2rem; /* Tamaño de fuente personalizado */
+  font-weight: bold; /* Texto en negrita */
+}
+
+.navbar-brand .app-title:hover {
+  text-decoration: none; /* Evita el subrayado al pasar el mouse */
+}

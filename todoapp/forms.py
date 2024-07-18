@@ -48,7 +48,7 @@ class BathroomForm(forms.ModelForm):
             'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Indique como llegar al baño y detalles importantes, Ej: Baño amplio, etc.'}),
             'image': forms.FileInput(attrs={'class': 'form-control'})
         }
-
+    
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
