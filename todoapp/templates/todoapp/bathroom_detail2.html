@@ -3,52 +3,54 @@
 {% block title %}{{ bathroom.name }}{% endblock %}
 
 {% block extra_css %}
-<style>
-        body {
-            font-family: 'Mulish', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            max-width: 1200px; /* Ajusta el ancho máximo según sea necesario */
-            margin: 0 auto; /* Centra el contenido */
-            margin-top: 60px;
-        }
-        .details-map {
-            display: flex;
-            flex-wrap: wrap; /* Permite que los elementos se ajusten automáticamente */
-            gap: 20px; /* Espacio entre las columnas */
-        }
-        .details {
-            flex: 1 1 45%; /* Ocupa el 45% del espacio disponible */
-        }
-        #map {
-            flex: 1 1 50%; /* Ocupa el 50% del espacio disponible */
-            height: 400px; /* Ajusta la altura según sea necesario */
-        }
-        .comments-section {
-            margin-top: 20px;
-        }
-        .comment {
-            border-bottom: 1px solid #ccc;
-            padding: 10px 0;
-        }
-        .comment-form {
-            margin-bottom: 20px;
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-        }
-</style>
+{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+    <style>
+            body {
+                font-family: 'Mulish', sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
+                max-width: 1200px; /* Ajusta el ancho máximo según sea necesario */
+                margin: 0 auto; /* Centra el contenido */
+                margin-top: 60px;
+            }
+            .details-map {
+                display: flex;
+                flex-wrap: wrap; /* Permite que los elementos se ajusten automáticamente */
+                gap: 20px; /* Espacio entre las columnas */
+            }
+            .details {
+                flex: 1 1 45%; /* Ocupa el 45% del espacio disponible */
+            }
+            #map {
+                flex: 1 1 50%; /* Ocupa el 50% del espacio disponible */
+                height: 400px; /* Ajusta la altura según sea necesario */
+            }
+            .comments-section {
+                margin-top: 20px;
+            }
+            .comment {
+                border-bottom: 1px solid #ccc;
+                padding: 10px 0;
+            }
+            .comment-form {
+                margin-bottom: 20px;
+            }
+            .pagination {
+                display: flex;
+                justify-content: center;
+                padding: 10px 0;
+            }
+    </style>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="window-container">
         <div class="details-map">
             <div class="details">
                 <h1>{{ bathroom.name }}</h1>
@@ -60,7 +62,7 @@
                     <form method="post">
                         {% csrf_token %}
                         {{ reviewForm.as_p }}
-                        <button type="submit" name="submit_review" class="btn btn-primary">Enviar</button>
+                        <button type="submit" name="submit_review" class="submit-btn">Enviar</button>
                     </form>
                 {% endif %}
             </div>
@@ -68,6 +70,8 @@
                 {{ map_html|safe }}
             </div>
         </div>
+    </div>
+    <div class="window-container">
         <div class="comments-section">
             <h3>Agrega un comentario</h3>
             <div class="comment-form">
@@ -75,7 +79,7 @@
                     <form method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" name="submit_comment" class="btn btn-primary">Enviar</button>
+                        <button type="submit" name="submit_comment" class="submit-btn">Enviar</button>
                     </form>
                 {% else %}
                     <p>Debes estar registrado para poder comentar. <a href="{% url 'login' %}">Iniciar sesión</a></p>

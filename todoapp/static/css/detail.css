@@ -1,0 +1,256 @@
+/* detail.css */
+
+/* Reset de estilos y variables */
+:root {
+  --font-main: 'Mulish', sans-serif;
+  --color-primary: #007bff; /* Color azul primario */
+  --color-primary-dark: #0056b3; /* Color azul oscuro */
+  --color-success: #28a745; /* Color verde de éxito */
+  --color-success-dark: #218838; /* Color verde oscuro */
+  --color-border: #ccc; /* Color del borde */
+  --color-bg: #ffffff; /* Color de fondo blanco */
+  --color-shadow: rgba(0, 0, 0, 0.1); /* Color de sombra */
+  --color-bg-light-gray: #f8f9fa; /* Gris claro */
+  --color-aliceblue: #f0f8ff; /* Color azul claro */
+}
+
+/* Estilos generales */
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-aliceblue);
+  margin: 0;
+  padding: 0;
+  font-size: 18px; /* Tamaño de letra base aumentado */
+}
+
+/* Estilo de ventana */
+.window-container {
+  background-color: var(--color-bg);
+  color: black;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px var(--color-shadow);
+  margin: 10px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--color-bg);
+  color: black;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px var(--color-shadow);
+  margin: 10px;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.user-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.username {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.logout-btn {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #f08080; /* Color de fondo en hover */
+  border-color: #fff0f5; /* Color del borde en hover */
+}
+
+/* Estilo para botones de envío */
+.btn {
+  background-color: var(--color-primary); /* Color de fondo azul */
+  border: 1px solid var(--color-primary); /* Color del borde azul */
+  color: white; /* Color del texto */
+  padding: 12px 24px; /* Tamaño del padding */
+  font-size: 1rem; /* Tamaño de la fuente */
+  border-radius: 5px; /* Bordes redondeados */
+  text-align: center; /* Texto centrado */
+  display: inline-block; /* Alineación en línea */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  text-decoration: none; /* Sin subrayado */
+}
+
+.btn:hover {
+  background-color: var(--color-primary-dark); /* Color de fondo en hover */
+  border-color: var(--color-primary-dark); /* Color del borde en hover */
+}
+
+/* Estilos para formularios */
+form {
+  margin-bottom: 20px;
+}
+
+input[type="number"],
+textarea {
+  width: 100%; /* Ancho completo */
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+}
+
+textarea {
+  resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+/* Mobile menu */
+.mobile-menu-toggle {
+  display: none;
+}
+
+.mobile-menu-toggle button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  height: 100%;
+  background-color: var(--color-bg);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+
+.mobile-menu.show {
+  display: block;
+  transform: translateX(0);
+}
+
+.mobile-menu .user-info {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mobile-menu .logout-btn {
+  margin-top: 10px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+}
+
+.overlay.show {
+  display: block;
+}
+
+/* Estilos para los contenedores */
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  align-items: flex-start;
+}
+
+.details-map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.details {
+  flex: 1 1 45%;
+}
+
+#map {
+  flex: 1 1 50%;
+  height: 400px;
+}
+
+.comments-section {
+  margin-top: 20px;
+}
+
+.comment {
+  border-bottom: 1px solid var(--color-border);
+  padding: 10px 0;
+}
+
+.comment-form {
+  margin-bottom: 20px;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination .step-links {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: var(--color-bg-light-gray);
+}
+
+.pagination a {
+  color: var(--color-primary);
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.pagination a:hover {
+  text-decoration: underline;
+}
+
+.pagination .current {
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+/* Estilos específicos para botones */
+.submit-btn {
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  color: white;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  display: inline-block;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  text-decoration: none;
+}
+
+.submit-btn:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}

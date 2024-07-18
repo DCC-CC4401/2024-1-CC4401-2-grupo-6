@@ -8,14 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    {% block extra_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
-    {% block extra_css %}{% endblock %}
+    {% endblock %}
 </head>
 <body>
     <!-- Barra de navegación -->
     <header class="window-container navbar">
         <div class="navbar-brand">
-            <span class="app-title">WC Finder Beauchef</span>
+            <a href="{% url 'home' %}" class="card-link">
+                <span class="app-title">WC Finder Beauchef</span>
+            </a>    
         </div>
         <div class="user-info">
             {% if user.is_authenticated %}

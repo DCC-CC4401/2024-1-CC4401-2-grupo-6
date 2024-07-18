@@ -1,28 +1,33 @@
-{% extends 'todoapp/_navbar.html' %}
+{% extends 'todoapp/navbar.html' %}
 
 {% block title %} Agregar Baño {% endblock %}
 
+{% block extra_css %}
+{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/add.css' %}">
+{% endblock %}
+
 {% block content %}
-
-<div class="container" style="margin-top: 2em; flex-direction: column">
-    <div id="encabezado" class="row">
-        <div class="col-12">
-            <h1>Agregar Baño</h1>
-            <p class="tagline">Completa el formulario para agregar un nuevo baño</p>
-        </div>
-    </div>
-
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="card">
-            <div class="card-header">
-                Nuevo Baño
-            </div>
-            <div class="card-body">
-                {{ form.as_p }}
-                <button class="btn btn-primary" type="submit">Guardar</button>
+<div class="window-container central">
+    <div class="container">
+        <div id="encabezado" class="row">
+            <div class="col-12">
+                <h1>Agregar Baño</h1>
+                <p class="tagline">Completa el formulario para agregar un nuevo baño</p>
             </div>
         </div>
-    </form>
-</div><!-- container -->
+        <hr>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-body">
+                    {{ form.as_p }}
+                    <div class="submit-btn-container">
+                        <button class="btn btn-primary submit-btn" type="submit">Enviar Solicitud</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div><!-- container -->
+</div>
 {% endblock %}
