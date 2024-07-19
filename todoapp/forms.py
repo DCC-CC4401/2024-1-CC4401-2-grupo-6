@@ -1,9 +1,13 @@
+# Importamos modulos necesarios
 from django import forms
 from .models import Cleaning, Tarea
 from .models import Bathroom
 from .models import Comment
 from categorias.models import Categoria
 
+# Creamos una clase que hereda de forms.ModelForm
+# para crear un formulario de baños
+# este formulario no se uso en el proyecto
 class NuevaTareaModelForm(forms.ModelForm):
     class Meta:
         model = Tarea
@@ -20,6 +24,9 @@ class NuevaTareaModelForm(forms.ModelForm):
             raise forms.ValidationError("Debe incluir el texto 'Baño' en el título")
         return field
 
+# Creamos una clase que hereda de forms.ModelForm
+# para crear un formulario para agregar baños
+# este formulario se uso en el proyecto
 class BathroomForm(forms.ModelForm):
     cleaning_points = forms.IntegerField(
         label='Limpieza',
@@ -49,6 +56,8 @@ class BathroomForm(forms.ModelForm):
             'image': forms.FileInput(attrs={'class': 'form-control'})
         }
     
+# Creamos una clase que hereda de forms.ModelForm
+# para crear un formulario de comentarios
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -60,6 +69,8 @@ class CommentForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ejemplo: Fui al baño y la luz estaba mala, etc.'}),
         }
 
+# Creamos una clase que hereda de forms.ModelForm
+# para crear un formulario de limpieza para la puntuación
 class CleaningForm(forms.ModelForm):
     class Meta:
         model = Cleaning

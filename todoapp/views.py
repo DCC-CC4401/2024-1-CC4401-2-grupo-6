@@ -1,15 +1,13 @@
-# Create your views here.
-# mapa
+# Importamos la libreria para crear un mapa
 import folium
 
+# Importamos las librerias necesarias
 from django.shortcuts import render, redirect
-
 from django.http import HttpResponseRedirect
-
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 
-# Create your views here.
+# Importamos los modelos necesarios
 from todoapp.models import Tarea
 from todoapp.models import User  
 from .models import Bathroom, Cleaning
@@ -19,9 +17,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CommentForm
 
 from categorias.models import Categoria
-
 from todoapp.forms import NuevaTareaModelForm
 
+# Esta vista es la pagina de inicio de la aplicación
+# se pueden filtrar los baños por edificio, piso, nombre y género
+# se pueden ver los baños en una lista paginada, con 10 por pagina
 def home(request):
     # Filtrar baños que estén marcados como publicados
     bathrooms = Bathroom.objects.filter(publicar=True)
@@ -79,6 +79,8 @@ def home(request):
     
     return render(request, 'todoapp/home.html', context)
 
+# Esta vista es la pagina de formulario del sprint 1
+# no se uso en el proyecto
 def tareas(request): #the index view
     #mis_tareas = Tarea.objects.all()  # quering all todos with the object manager
     if request.user.is_authenticated:
@@ -117,6 +119,8 @@ def tareas(request): #the index view
 
         return render(request, "todoapp/index.html", {"tareas": mis_tareas, "form_tarea": form_tarea})
 
+# Esta vista es la pagina de registro de usuarios
+# se pide el nombre, contraseña, apodo, pronombre y mail
 def register_user(request):
     if request.method == 'GET': #Si estamos cargando la página
      return render(request, "todoapp/register_user.html") #Mostrar el template
@@ -141,6 +145,8 @@ def register_user(request):
         messages.error(request, 'Hubo un error al crear el usuario: ' + str(e))
         return render(request, "todoapp/register_user.html")
 
+# Esta vista es la pagina de login de usuarios
+# se pide el nombre y contraseña para ingresar
 def login_user(request):
     if request.method == 'GET':
         return render(request,"todoapp/login.html")  
@@ -155,11 +161,13 @@ def login_user(request):
             error_message = "Usuario o contraseña incorrectos."
             return render(request, 'login.html', {'error_message': error_message})
 
- 
+# Esta vista es la pagina de logout de usuarios
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/login')
 
+# Esta vista es la pagina de recuperación de contraseña
+# no se implemento finalmente para el sprint 2
 def forgot_password(request):
     """
     This function is called when the user wants to recover their password on the
@@ -187,7 +195,10 @@ def forgot_password(request):
         else:
             return HttpResponseRedirect('/register')
         
-
+# Esta vista es la pagina de lista de baños de prueba
+# se pueden filtrar los baños por edificio, piso y género
+# luego esto se movio a la pagina de inicio
+# no se implemento finalmente para el sprint 2
 def bathroom_list(request):
     # Filtrar baños que estén marcados como publicados
     bathrooms = Bathroom.objects.filter(publicar=True)
@@ -231,6 +242,10 @@ def bathroom_list(request):
     }
     return render(request, 'todoapp/bathroom_list.html', context)
 
+# Esta vista es la pagina de detalle de baño
+# se pueden ver los comentarios, puntuaciones de los baños, la ubicación del baño
+# la descripcion, fotos si es que hay, el genero del baño y el piso
+# se pueden agregar comentarios 
 def bathroom_detail(request, id):
     bathroom = Bathroom.objects.get(id=id)
     comments = bathroom.comments.all().order_by('-created_at')
@@ -293,6 +308,9 @@ def bathroom_detail(request, id):
     
     return render(request, 'todoapp/bathroom_detail.html', context)
 
+# Esta vista es la pagina de detalle de baño
+# se creo para modificar el css
+# finalmente no se uso en el proyecto
 def bathroom_detail2(request, id):
     bathroom = Bathroom.objects.get(id=id)
     comments = bathroom.comments.all().order_by('-created_at')
@@ -355,6 +373,9 @@ def bathroom_detail2(request, id):
     
     return render(request, 'todoapp/bathroom_detail2.html', context)
 
+# Esta vista es el formulario de agregar baño
+# se pide el nombre, edificio, piso, género, descripción y foto (opcional)
+# tambien se pide la puntuación de limpieza del baño
 def add_bathroom(request):
     if request.user.is_authenticated:
         if request.method == 'POST':

@@ -1,5 +1,6 @@
 # 2024-2-Grupo-6: PROYECTO WC FINDER
 # Ingeniería de Software CC4401-2 Otoño 2024
+
 **Integrantes**: 
 - Ignacio Humire
 - Ignacio Gajardo
@@ -9,7 +10,10 @@
 - Diego Tapia
 ---
 ## El proyecto
-WC FINDER es una aplicación web móvil (pricipamente), que permite a los estudiantes encontrar un baño de acuerdo a sus necesidades o preferencias. 
+WC FINDER es una aplicación web móvil, que permite a los estudiantes encontrar un baño de acuerdo a sus necesidades o preferencias. 
+
+Todo estudiante de Beauchef alguna vez se ha encontrado con el dilema: "¿A qué baño ir?". Esta decisión puede estar influenciada por la ubicación, la urgencia de la situación o por preferencias personales. Para facilitar la solución a este dilema se ha creado el proyecto WC Finder Beauchef, una plataforma donde los estudiantes pueden encontrar baños en el campus FCFM. Esta aplicación web permite conocer características de los baños, como ubicación, limpieza, privacidad y señal móvil. Además, los usuarios pueden calificar y comentar cada baño.
+
 ## Para iniciar el proyecto
 ### Repositorio
 Para comenzar debemos clonar el repositorio o descargarlo.
@@ -47,7 +51,7 @@ python manage.py runserver
 ## Sprint 1
 Fecha de término: 22-05-2024
 ### Notas de versión:
--  Se implementó el esqueleto de una aplicación web con django
+- Se implementó el esqueleto de una aplicación web con django
 - Se implementaron las vistas /register , /login y /tareas.
 - Se implementó la funcionalidad para que usuario se pueda registrar
 - Se implementó la funcionalidad para que un usuario se logee.
@@ -57,3 +61,10 @@ Fecha de término: 22-05-2024
 - Acción de aceptar solicitudes de formularios en el perfil de administrador.
 - Agregar opciones y características al formulario.
 - Cambios en diseño registro y formulario
+
+## Sprint 2
+Fecha de término: 18-07-2024
+### Notas de versión:
+- Se implementó la funcionalidad para que el administrador pueda aceptar solicitudes de formularios.
+- Se agregaron funcionalidades al formulario.
+- Se implementó una vista para cada baño.
