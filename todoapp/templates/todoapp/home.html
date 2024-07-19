@@ -26,7 +26,7 @@
                 <select name="floor" id="floor">
                     <option value="">Todos los pisos</option>
                     {% for floor in floors %}
-                        <option value="{{ floor }}" {% if floor == selected_floor %}selected{% endif %}>
+                        <option value="{{ floor }}">
                             {{ floor }}
                         </option>
                     {% endfor %}
