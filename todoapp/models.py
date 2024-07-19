@@ -1,16 +1,21 @@
+# Importamos modulos necesarios
 from django.db import models
-
-# Create your models here.
 from django.utils import timezone
 from categorias.models import Categoria
 from django.contrib.auth.models import AbstractUser
 from django.db.models import Avg
 
+# Creamos la clase User que hereda de AbstractUser
+# para agregar campos personalizados al modelo User
+# pronombre y apodo, los pronombres se eliminaron del proyecto
 class User(AbstractUser):
   pronombres = [('La','La'),('El','El'), ('Le','Le'),('Otro','Otro')]
   pronombre = models.CharField(max_length=5,choices=pronombres)
   apodo = models.CharField(max_length=30)
     
+# Creamos la clase Tarea que hereda de models.Model
+# para crear los campos a pedir en la creación del formulario de baño
+# esto no se uso en el proyecto
 class Tarea(models.Model):  # Todolist able name that inherits models.Model
     titulo = models.CharField(max_length=250)  # un varchar
     contenido = models.TextField(blank=True)  # un text
@@ -21,6 +26,10 @@ class Tarea(models.Model):  # Todolist able name that inherits models.Model
     def __str__(self):
         return self.titulo  # name to be shown when called
 
+# Creamos la clase Bathroom que hereda de models.Model
+# para crear los campos a pedir en el formulario de baño
+# este formulario se uso en el proyecto
+# se pide el nombre, edificio, piso, género, descripción, imagen, publicar, latitud y longitud.
 class Bathroom(models.Model):
     GENDER_CHOICES = [
         ('mujer', 'Mujer'),
@@ -45,7 +54,6 @@ class Bathroom(models.Model):
         ('6', '6'),
         ('7', '7'),
     ]
-
 
     name = models.CharField(max_length=100)
 
@@ -75,6 +83,9 @@ class Bathroom(models.Model):
     def print_test(self):
         return self.cleaning_reviews.all()
 
+# Creamos la clase Comment que hereda de models.Model
+# para crear los campos a pedir en el formulario de comentarios
+# los comentarios se publican estando la sesión iniciada
 class Comment(models.Model):
     bathroom = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -84,6 +95,9 @@ class Comment(models.Model):
     def __str__(self):
         return f"Comment by {self.user.username} on {self.bathroom.name}"
 
+# Creamos la clase Cleaning que hereda de models.Model
+# para crear los campos a pedir en el formulario de limpieza
+# los puntos se asignan desde el 1 al 10
 class Cleaning(models.Model):
     bathroom = models.ForeignKey(Bathroom, on_delete=models.CASCADE, related_name='cleaning_reviews')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
