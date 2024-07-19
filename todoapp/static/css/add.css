@@ -354,6 +354,8 @@ body {
   flex-direction: column; /* Alinea los elementos en una columna */
   align-items: center; /* Centra los elementos horizontalmente */
   margin: 0 auto; /* Centra el contenedor horizontalmente */
+  width: 100%; /* Ajusta el ancho del contenedor */
+  max-width: 700px; /* Establece un ancho máximo */
 }
 
 /* Asegúrate de que los elementos dentro del contenedor estén en una columna */
@@ -368,4 +370,22 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 20px; /* Añade un margen superior para separación */
+}
+
+#id_description {
+  height: 80px; /* Ajusta este valor según tus necesidades */
+  width: 100%; /* Ajusta este valor según tus necesidades, por ejemplo 80% */
+  max-width: 500px; /* Establece un ancho máximo si es necesario */
+  padding: 10px; /* Espaciado interno */
+  box-sizing: border-box; /* Incluye padding en el ancho */
+  overflow: auto; /* Permite el scroll si el texto excede el tamaño */
+  resize: vertical; /* Permite cambiar el tamaño verticalmente */
+  /* Alineación del texto */
+  text-align: left; /* Alinea el texto a la izquierda */
+  vertical-align: top; /* Alinea el texto arriba */
+}
+
+#id_cleaning_points {
+  width: 60%; /* Ajusta este valor según tus necesidades, por ejemplo 80% */
+  max-width: 500px; /* Establece un ancho máximo si es necesario */
 }
