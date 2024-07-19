@@ -27,6 +27,7 @@ class BathroomForm(forms.ModelForm):
             'class': 'form-control',
             'min': 1,
             'max': 10,
+            'placeholder': 'Ingrese un número del 1 al 10'
         }))
     class Meta:
         model = Bathroom
@@ -40,14 +41,14 @@ class BathroomForm(forms.ModelForm):
             'image': 'Foto'
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Baño'}),
             'building': forms.Select(attrs={'class': 'form-control'}),
             'floor': forms.Select(attrs={'class': 'form-control'}), 
             'gender': forms.Select(attrs={'class': 'form-control'}),
-            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Indique como llegar al baño y detalles importantes, Ej: Baño amplio, etc.'}),
             'image': forms.FileInput(attrs={'class': 'form-control'})
         }
-
+    
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
